@@ -1,9 +1,8 @@
 package com.solvd.jbdc.dao;
 
 import com.solvd.models.Manufacturer;
-import com.solvd.models.ServiceType;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iManufacturerDAO;
+import com.solvd.interfaces.IManufacturerDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManufacturerDAO implements iManufacturerDAO{
+public class ManufacturerDAO implements IManufacturerDAO {
     private static final Logger LOGGER = LogManager.getLogger(ManufacturerDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     @Override
@@ -49,7 +48,7 @@ public class ManufacturerDAO implements iManufacturerDAO{
                 while (rs.next()) {
                     Manufacturer manufacturer = new Manufacturer();
                     manufacturer.setId(rs.getInt("id"));
-                    manufacturer.setManufacturerName(rs.getString("manufacturer_name"));// FIXME
+                    manufacturer.setManufacturerName(rs.getString("manufacturer_name"));
                     manufacturers.add(manufacturer);
                 }
             }

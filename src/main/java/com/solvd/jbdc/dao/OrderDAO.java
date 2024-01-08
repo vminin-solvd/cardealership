@@ -5,7 +5,7 @@ import com.solvd.models.Customer;
 import com.solvd.models.Employee;
 import com.solvd.models.Car;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iOrderDAO;
+import com.solvd.interfaces.IOrderDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDAO implements iOrderDAO {
+public class OrderDAO implements IOrderDAO {
     private static final Logger LOGGER = LogManager.getLogger(CarSaleDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 

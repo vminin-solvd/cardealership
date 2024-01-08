@@ -2,7 +2,7 @@ package com.solvd.jbdc.dao;
 
 import com.solvd.models.CarSale;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iCarSaleDAO;
+import com.solvd.interfaces.ICarSaleDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarSaleDAO implements iCarSaleDAO {
+public class CarSaleDAO implements ICarSaleDAO {
     private static final Logger LOGGER = LogManager.getLogger(CarSaleDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 

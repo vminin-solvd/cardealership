@@ -1,12 +1,12 @@
 package com.solvd.services;
 
-import com.solvd.interfaces.iEmployeeDAO;
+import com.solvd.interfaces.IEmployeeDAO;
 import com.solvd.jbdc.dao.EmployeeDAO;
 import com.solvd.models.Employee;
 
 import java.util.List;
 
-public class EmployeeService implements iEmployeeDAO {
+public class EmployeeService implements IEmployeeDAO {
 
     EmployeeDAO employeeDAO = new EmployeeDAO();
 
@@ -36,7 +36,7 @@ public class EmployeeService implements iEmployeeDAO {
     }
 
     @Override
-    public Employee getEmployeeByLastName(String lastName) {
+    public List<Employee> getEmployeeByLastName(String lastName) {
         return employeeDAO.getEmployeeByLastName(lastName);
     }
 }

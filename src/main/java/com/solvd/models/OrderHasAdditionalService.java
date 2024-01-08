@@ -1,16 +1,12 @@
 package com.solvd.models;
 
 public class OrderHasAdditionalService {
-    private int id;
     private Order order;
     private AdditionalService additionalService;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public OrderHasAdditionalService(Order order, AdditionalService additionalService) {
+        this.order = order;
+        this.additionalService = additionalService;
     }
 
     public Order getOrder() {
@@ -32,8 +28,7 @@ public class OrderHasAdditionalService {
     @Override
     public String toString() {
         return "OrderHasAdditionalService{" +
-                "id=" + id +
-                ", order=" + order +
+                "order=" + order +
                 ", additionalService=" + additionalService +
                 '}';
     }

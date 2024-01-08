@@ -1,9 +1,8 @@
 package com.solvd.jbdc.dao;
 
 import com.solvd.models.Position;
-import com.solvd.models.ServiceType;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iPositionDAO;
+import com.solvd.interfaces.IPositionDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PositionDAO implements iPositionDAO{
+public class PositionDAO implements IPositionDAO {
     private static final Logger LOGGER = LogManager.getLogger(PositionDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 

@@ -1,9 +1,8 @@
 package com.solvd.jbdc.dao;
 
-import com.solvd.models.AdditionalService;
 import com.solvd.models.ServiceType;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iServiceTypeDAO;
+import com.solvd.interfaces.IServiceTypeDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceTypeDAO implements iServiceTypeDAO{
+public class ServiceTypeDAO implements IServiceTypeDAO {
     private static final Logger LOGGER = LogManager.getLogger(ServiceTypeDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 

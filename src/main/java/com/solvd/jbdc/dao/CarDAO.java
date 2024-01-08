@@ -1,10 +1,8 @@
 package com.solvd.jbdc.dao;
 
 import com.solvd.models.Car;
-import com.solvd.models.CarSale;
-import com.solvd.models.CarType;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iCarDAO;
+import com.solvd.interfaces.ICarDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarDAO implements iCarDAO {
+public class CarDAO implements ICarDAO {
     private static final Logger LOGGER = LogManager.getLogger(CarDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 

@@ -1,9 +1,8 @@
 package com.solvd.jbdc.dao;
 
 import com.solvd.models.Customer;
-import com.solvd.models.ServiceType;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iCustomerDAO;
+import com.solvd.interfaces.ICustomerDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerDAO implements iCustomerDAO {
+public class CustomerDAO implements ICustomerDAO {
     private static final Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -43,16 +42,16 @@ public class CustomerDAO implements iCustomerDAO {
     public List<Customer> getAll(){
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM customers";
-        List<Customer> Customers = new ArrayList<>();
+        List<Customer> customers = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.execute();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Customer Customer = new Customer();
-                    Customer.setId(rs.getInt("id"));
-                    Customer.setFirstName(rs.getString("first_name"));
-                    Customer.setLastName(rs.getString("last_name"));
-                    Customers.add(Customer);
+                    Customer customer = new Customer();
+                    customer.setId(rs.getInt("id"));
+                    customer.setFirstName(rs.getString("first_name"));
+                    customer.setLastName(rs.getString("last_name"));
+                    customers.add(customer);
                 }
             }
         } catch (SQLException e) {
@@ -66,7 +65,7 @@ public class CustomerDAO implements iCustomerDAO {
                 }
             }
         }
-        return Customers;
+        return customers;
     }
 
 

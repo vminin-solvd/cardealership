@@ -2,7 +2,7 @@ package com.solvd.jbdc.dao;
 
 import com.solvd.models.AdditionalService;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iAdditionalServiceDAO;
+import com.solvd.interfaces.IAdditionalServiceDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdditionalServiceDAO implements iAdditionalServiceDAO {
+public class AdditionalServiceDAO implements IAdditionalServiceDAO {
     private static final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 

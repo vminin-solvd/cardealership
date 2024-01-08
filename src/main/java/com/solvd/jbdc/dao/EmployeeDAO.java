@@ -3,7 +3,7 @@ package com.solvd.jbdc.dao;
 import com.solvd.models.Employee;
 import com.solvd.models.Position;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iEmployeeDAO;
+import com.solvd.interfaces.IEmployeeDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAO implements iEmployeeDAO {
+public class EmployeeDAO implements IEmployeeDAO {
     private static final Logger LOGGER = LogManager.getLogger(CarSaleDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -44,7 +44,7 @@ public class EmployeeDAO implements iEmployeeDAO {
     public List<Employee> getAll(){
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM employees";
-        List<Employee> Employees = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.execute();
             try (ResultSet rs = ps.getResultSet()) {
@@ -56,7 +56,7 @@ public class EmployeeDAO implements iEmployeeDAO {
                     Position position = new Position();
                     position.setId(rs.getInt("position_id"));
                     employee.setPosition(position);
-                    Employees.add(employee);
+                    employees.add(employee);
                 }
             }
         } catch (SQLException e) {
@@ -70,7 +70,7 @@ public class EmployeeDAO implements iEmployeeDAO {
                 }
             }
         }
-        return Employees;
+        return employees;
     }
 
 

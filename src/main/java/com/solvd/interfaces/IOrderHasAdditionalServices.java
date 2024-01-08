@@ -1,5 +1,11 @@
 package com.solvd.interfaces;
 
-public interface IOrderHasAdditionalServices<OrderHasAdditionalServices, AdditionalServices> {
-    // FIXME I will implement this in the morning
+import com.solvd.models.AdditionalService;
+import com.solvd.models.OrderHasAdditionalService;
+
+import java.util.List;
+
+public interface IOrderHasAdditionalServices<OrderHasAdditionalServices, AdditionalServices> extends IBaseDAO<OrderHasAdditionalService> {
+    List<AdditionalService> getAllServicesById(int id);
+
 }

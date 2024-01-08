@@ -1,12 +1,12 @@
 package com.solvd.services;
 
-import com.solvd.interfaces.iServiceTypeDAO;
+import com.solvd.interfaces.IServiceTypeDAO;
 import com.solvd.jbdc.dao.ServiceTypeDAO;
 import com.solvd.models.ServiceType;
 
 import java.util.List;
 
-public class ServiceTypeService implements iServiceTypeDAO {
+public class ServiceTypeService implements IServiceTypeDAO {
 
     ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
 
