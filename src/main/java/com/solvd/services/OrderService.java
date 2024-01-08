@@ -32,11 +32,11 @@ public class OrderService implements iOrderDAO {
 
     @Override
     public List<Order> getAll() {
-        return ;
+        return orderDAO.getAll();
     }
 
     @Override
     public List<Order> getOrdersByEmployeeID(int id) {
-        return null;
+        return orderDAO.getOrdersByEmployeeID(id);
     }
 }

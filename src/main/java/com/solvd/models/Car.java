@@ -6,18 +6,8 @@ public class Car {
     private String model;
     private String year; // what type should this be? YEAR?
     private boolean isSold;
-    private int carTypeId;
-    private int manufacturerId;
-
-    public Car(int id, int price, String model, String year, boolean isSold, int carTypeId, int manufacturerId) {
-        this.id = id;
-        this.price = price;
-        this.model = model;
-        this.year = year;
-        this.isSold = isSold;
-        this.carTypeId = carTypeId;
-        this.manufacturerId = manufacturerId;
-    }
+    private CarType carType;
+    private Manufacturer manufacturer;
 
     public int getId() {
         return id;
@@ -59,20 +49,20 @@ public class Car {
         isSold = sold;
     }
 
-    public int getCarTypeId() {
-        return carTypeId;
+    public CarType getCarType() {
+        return carType;
     }
 
-    public void setCarTypeId(int carTypeId) {
-        this.carTypeId = carTypeId;
+    public void setCarType(CarType carType) {
+        this.carType = carType;
     }
 
-    public int getManufacturerId() {
-        return manufacturerId;
+    public Manufacturer getManufacturer() {
+        return manufacturer;
     }
 
-    public void setManufacturerId(int manufacturerId) {
-        this.manufacturerId = manufacturerId;
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     @Override
@@ -83,8 +73,8 @@ public class Car {
                 ", model='" + model + '\'' +
                 ", year='" + year + '\'' +
                 ", isSold=" + isSold +
-                ", carTypeId=" + carTypeId +
-                ", manufacturerId=" + manufacturerId +
+                ", carType=" + carType +
+                ", manufacturer=" + manufacturer +
                 '}';
     }
 }

@@ -4,41 +4,38 @@ public class Employee {
     private int id;
     private String firstName;
     private String lastName;
-    private int positionId;
+    private Position position;
 
-    public Employee() {
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setPositionId(int positionId) {
-        this.positionId = positionId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public int getPositionId() {
-        return positionId;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     @Override
@@ -47,7 +44,7 @@ public class Employee {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", positionId=" + positionId +
+                ", position=" + position +
                 '}';
     }
 }

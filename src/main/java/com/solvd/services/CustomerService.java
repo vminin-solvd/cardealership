@@ -9,6 +9,7 @@ import java.util.List;
 public class CustomerService implements iCustomerDAO {
 
     CustomerDAO customerDAO = new CustomerDAO();
+
     @Override
     public void saveEntity(Customer customer) {
         customerDAO.saveEntity(customer);
@@ -36,6 +37,6 @@ public class CustomerService implements iCustomerDAO {
 
     @Override
     public Customer getCustomerByFirstName(String firstName) {
-        return customerDAO.getCustomerByFirstName(f);
+        return customerDAO.getCustomerByFirstName(firstName);
     }
 }

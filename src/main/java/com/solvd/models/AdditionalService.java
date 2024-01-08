@@ -2,34 +2,29 @@ package com.solvd.models;
 
 public class AdditionalService {
 private int id;
-private String serviceType;
+private ServiceType serviceType;
 
-public AdditionalService() {
-    this.id = id;
-    this.serviceType = serviceType;
-}
+    public int getId() {
+        return id;
+    }
 
-public void setId(int id) {
-    this.id = id;
-}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-public void setServiceType(String serviceType) {
-    this.serviceType = serviceType;
-}
+    public ServiceType getServiceType() {
+        return serviceType;
+    }
 
-public int getId() {
-    return id;
-}
-
-public String getServiceType() {
-    return serviceType;
-}
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
+    }
 
     @Override
     public String toString() {
         return "AdditionalService{" +
                 "id=" + id +
-                ", serviceType='" + serviceType + '\'' +
+                ", serviceType=" + serviceType +
                 '}';
     }
 }

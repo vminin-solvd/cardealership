@@ -1,8 +1,11 @@
 package com.solvd.jbdc.dao;
 
+import com.solvd.models.AdditionalService;
 import com.solvd.models.ServiceType;
 import com.solvd.util.ConnectionPool;
 import com.solvd.interfaces.iServiceTypeDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceTypeDAO implements iServiceTypeDAO{
+    private static final Logger LOGGER = LogManager.getLogger(ServiceTypeDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     public void saveEntity(ServiceType serviceType) {
@@ -22,13 +26,13 @@ public class ServiceTypeDAO implements iServiceTypeDAO{
             ps.setString(2, serviceType.getServiceType());
 
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error saving service type entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -45,18 +49,18 @@ public class ServiceTypeDAO implements iServiceTypeDAO{
                 while (rs.next()) {
                     ServiceType serviceType = new ServiceType();
                     serviceType.setId(rs.getInt("id"));
-                    serviceType.setServiceType(rs.getString("service_type"));// FIXME
+                    serviceType.setServiceType(rs.getString("service_type"));
                     serviceTypes.add(serviceType);
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error getting all service type entities: ", e);
         } finally {
             if( connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -67,7 +71,7 @@ public class ServiceTypeDAO implements iServiceTypeDAO{
     @Override
     public ServiceType getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
-        String query = "SELECT * FROM ServiceTypes WHERE id = (?)";
+        String query = "SELECT * FROM service_types WHERE id = (?)";
         ServiceType serviceType = new ServiceType();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
@@ -79,36 +83,34 @@ public class ServiceTypeDAO implements iServiceTypeDAO{
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error getting service type entity by ID: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection((connection));
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
-
-
         return serviceType;
     }
 
     @Override
     public void updateEntity(ServiceType serviceType) {
         Connection connection = connectionPool.getConnection();
-        String query = "UPDATE service_types SET service_type = (?) WHERE id = (?)"; // FIXME MUST UPDATE LASTNAME ALSO
+        String query = "UPDATE service_types SET service_type = (?) WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, serviceType.getServiceType());
             ps.setInt(2, serviceType.getId());
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error updating service type entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -122,13 +124,13 @@ public class ServiceTypeDAO implements iServiceTypeDAO{
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error removing service type entity by ID: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -137,6 +139,30 @@ public class ServiceTypeDAO implements iServiceTypeDAO{
 
     @Override
     public ServiceType getServiceTypeByName(String serviceTypeName) {
-        return null;
+        Connection connection = connectionPool.getConnection();
+        String query = "SELECT FROM service_types WHERE service_type = (?)";
+        ServiceType serviceType = null;
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, serviceTypeName);
+            ps.execute();
+            try (ResultSet rs = ps.getResultSet()) {
+                while (rs.next()) {
+                    serviceType.setId(rs.getInt("id"));
+                    serviceType.setServiceType(rs.getString("service_type"));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Error getting service type entity by name: ", e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connectionPool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.info("Error releasing connection: ", e);
+                }
+            }
+        }
+        return serviceType;
     }
 }
