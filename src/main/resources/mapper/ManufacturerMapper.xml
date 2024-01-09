@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.jdbc.dao.ManufacturerDAO">
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO manufacturers(id, manufacturer_name) values (#{id}, #{manufacturerName})
+    </insert>
+
+    <sql id="select">
+        SELECT * FROM manufacturers
+    </sql>
+
+    <select id="getEntityById">
+        <include refid="select"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getManufacturerByName">
+        <include refid="select"/>
+        WHERE manufacturer_name = #{manufacturerName}
+    </select>
+
+    <select id="getAll">
+        <include refid="select"/>
+    </select>
+
+    <update id="updateEntity">
+        UPDATE manufacturers SET manufacturer_name = #{manufacturerName} where id = #{id }
+    </update>
+
+    <delete id="removeEntityById">
+        DELETE FROM manufacturers WHERE id = #{id}
+    </delete>
+
+    <resultMap id="ManufacturerResultMap" type="com.solvd.models.Manufacturer" autoMapping="false">
+        <id column="id" property="id"/>
+    </resultMap>
+
+</mapper>
