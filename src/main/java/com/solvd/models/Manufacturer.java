@@ -1,6 +1,7 @@
 package com.solvd.models;
 
 public class Manufacturer {
+
     private int id;
     private String manufacturerName;
 

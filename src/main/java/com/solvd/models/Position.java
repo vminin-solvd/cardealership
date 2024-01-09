@@ -1,11 +1,11 @@
 package com.solvd.models;
 
 public class Position {
-private int id;
-private String positionName;
 
-    public Position() {
-}
+    private int id;
+    private String positionName;
+
+    public Position() {}
 
     public int getId() {
         return id;

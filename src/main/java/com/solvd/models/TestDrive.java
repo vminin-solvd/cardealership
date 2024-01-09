@@ -3,6 +3,7 @@ package com.solvd.models;
 import java.sql.Date;
 
 public class TestDrive {
+
     private int id;
     private Date date;
     private Car car;

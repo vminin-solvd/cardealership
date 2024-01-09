@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DBConfig {
+
     private static final Properties properties;
 
     static {

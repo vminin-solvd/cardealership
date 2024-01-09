@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices<OrderHasAdditionalService, AdditionalService> {
-    private static final Logger LOGGER = LogManager.getLogger(OrderHasAdditionalServiceDAO.class);
+
+    private final Logger LOGGER = LogManager.getLogger(OrderHasAdditionalServiceDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     private OrderDAO orderDAO = new OrderDAO();
     private AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();

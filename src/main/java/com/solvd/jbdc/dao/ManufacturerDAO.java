@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManufacturerDAO implements IManufacturerDAO {
-    private static final Logger LOGGER = LogManager.getLogger(ManufacturerDAO.class);
+
+    private final Logger LOGGER = LogManager.getLogger(ManufacturerDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     @Override
     public void saveEntity(Manufacturer manufacturer) {

@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO implements ICustomerDAO {
-    private static final Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
+
+    private final Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     public void saveEntity(Customer customer) {

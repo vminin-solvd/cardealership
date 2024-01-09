@@ -7,7 +7,9 @@ import com.solvd.models.AdditionalService;
 import java.util.List;
 
 public class AdditionalServiceService implements IAdditionalServiceDAO {
-   private static final AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+
+    private static final AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+
     @Override
     public void saveEntity(AdditionalService additionalService) {
         additionalServiceDAO.saveEntity(additionalService);
