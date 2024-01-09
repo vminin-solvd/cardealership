@@ -9,7 +9,7 @@ public class DBConfig {
 
     static {
         properties = new Properties();
-        try(InputStream inputStream = DBConfig.class.getResourceAsStream("/db,properties")) {
+        try (InputStream inputStream = DBConfig.class.getResourceAsStream("/db.properties")) {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace(); // FIXME Replace with LOGGER

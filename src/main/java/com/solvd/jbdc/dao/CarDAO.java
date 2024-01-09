@@ -33,11 +33,8 @@ public class CarDAO implements ICarDAO {
                     car.setYear(rs.getString("year"));
                     car.setSold(rs.getBoolean("is_sold"));
 
-                    CarTypeDAO carTypeDAO = new CarTypeDAO();
-                    ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-                    car.setCarType(carTypeDAO.getEntityById(rs.getInt("car_type_id")));
-                    car.setManufacturer(manufacturerDAO.getEntityById(rs.getInt("manufacturer_id")));
-
+                    car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
+                    car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
                     cars.add(car);}
             }
         } catch (SQLException e) {
@@ -95,10 +92,8 @@ public class CarDAO implements ICarDAO {
                     car.setYear(rs.getString("year"));
                     car.setSold(rs.getBoolean("is_sold"));
 
-                    CarTypeDAO carTypeDAO = new CarTypeDAO();
-                    ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-                    car.setCarType(carTypeDAO.getEntityById(rs.getInt("car_type_id")));
-                    car.setManufacturer(manufacturerDAO.getEntityById(rs.getInt("manufacturer_id")));
+                    car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
+                    car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
                 }
             }
         } catch (SQLException e) {
@@ -177,10 +172,8 @@ public class CarDAO implements ICarDAO {
                 car.setYear(rs.getString("year"));
                 car.setSold(rs.getBoolean("is_sold"));
 
-                CarTypeDAO carTypeDAO = new CarTypeDAO();
-                ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-                car.setCarType(carTypeDAO.getEntityById(rs.getInt("car_type_id")));
-                car.setManufacturer(manufacturerDAO.getEntityById(rs.getInt("manufacturer_id")));
+                car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
+                car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
 
                 cars.add(car);
             }

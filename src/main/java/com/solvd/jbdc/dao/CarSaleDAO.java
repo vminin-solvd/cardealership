@@ -29,13 +29,9 @@ public class CarSaleDAO implements ICarSaleDAO {
                     CarSale carSale = new CarSale();
                     carSale.setId(rs.getInt("id"));
 
-                    CustomerDAO customerDAO = new CustomerDAO();
-                    EmployeeDAO employeeDAO = new EmployeeDAO();
-                    CarDAO carDAO = new CarDAO();
-
-                    carSale.setCustomer(customerDAO.getEntityById(rs.getInt("customer_id")));
-                    carSale.setEmployee(employeeDAO.getEntityById(rs.getInt("employee_id")));
-                    carSale.setCar(carDAO.getEntityById(rs.getInt("car_id")));
+                    carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
+                    carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
+                    carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
                     carSales.add(carSale);
                 }
             }
@@ -87,12 +83,10 @@ public class CarSaleDAO implements ICarSaleDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     carSale.setId(rs.getInt("id"));
-                    CustomerDAO customerDAO = new CustomerDAO();
-                    EmployeeDAO employeeDAO = new EmployeeDAO();
-                    CarDAO carDAO = new CarDAO();
-                    carSale.setCustomer(customerDAO.getEntityById(rs.getInt("customer_id")));
-                    carSale.setEmployee(employeeDAO.getEntityById(rs.getInt("employee_id")));
-                    carSale.setCar(carDAO.getEntityById(rs.getInt("car_id")));
+
+                    carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
+                    carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
+                    carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
                 }
             }
         } catch (SQLException e) {
@@ -112,7 +106,7 @@ public class CarSaleDAO implements ICarSaleDAO {
     @Override
     public void updateEntity(CarSale carSale) {
         Connection connection = connectionPool.getConnection();
-        String query = "UPDATE car_types SET customer_id = (?) AND employee_id = (?) AND car_id = (?) WHERE id = (?)";
+        String query = "UPDATE car_sales SET customer_id = (?), employee_id = (?), car_id = (?) WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, carSale.getCustomer().getId());
             ps.setInt(2, carSale.getEmployee().getId());
@@ -151,7 +145,6 @@ public class CarSaleDAO implements ICarSaleDAO {
                 }
             }
         }
-
     }
 
     @Override
@@ -167,13 +160,9 @@ public class CarSaleDAO implements ICarSaleDAO {
                     CarSale carSale = new CarSale();
                     carSale.setId(rs.getInt("id"));
 
-                    CustomerDAO customerDAO = new CustomerDAO();
-                    EmployeeDAO employeeDAO = new EmployeeDAO();
-                    CarDAO carDAO = new CarDAO();
-
-                    carSale.setCustomer(customerDAO.getEntityById(rs.getInt("customer_id")));
-                    carSale.setEmployee(employeeDAO.getEntityById(rs.getInt("employee_id")));
-                    carSale.setCar(carDAO.getEntityById(rs.getInt("car_id")));
+                    carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
+                    carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
+                    carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
 
                     carSales.add(carSale);
                 }

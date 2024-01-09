@@ -99,10 +99,10 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
             ps.setInt(1, id);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected < 1) {
-                LOGGER.info("No OrderHasAdditionalService entity found with order_id: " + id);
+                LOGGER.info("No Order Has Additional Service entity found with order_id: " + id);
             }
         } catch (SQLException e) {
-            LOGGER.error("Error removing OrderHasAdditionalService entity by order_id: ", e);
+            LOGGER.error("Error removing Order Has Additional Service entity by order_id: ", e);
         } finally {
             if (connection != null) {
                 try {
@@ -170,5 +170,4 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
         }
         return additionalServices;
     }
-
 }

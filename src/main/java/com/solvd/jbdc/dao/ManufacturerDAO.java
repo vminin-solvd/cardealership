@@ -135,6 +135,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
             }
         }
     }
+
     @Override
     public Manufacturer getManufacturerByName(String manufacturerName) {
         Connection connection = connectionPool.getConnection();

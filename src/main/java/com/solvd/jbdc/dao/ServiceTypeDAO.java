@@ -66,7 +66,6 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         return serviceTypes;
     }
 
-
     @Override
     public ServiceType getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
@@ -134,7 +133,6 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
             }
         }
     }
-
 
     @Override
     public ServiceType getServiceTypeByName(String serviceTypeName) {

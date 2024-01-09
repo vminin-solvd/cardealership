@@ -59,7 +59,6 @@ public class OrderDAO implements IOrderDAO {
         return orders;
     }
 
-
     @Override
     public void saveEntity(Order order) {
         Connection connection = connectionPool.getConnection();
@@ -94,13 +93,9 @@ public class OrderDAO implements IOrderDAO {
                     order = new Order();
                     order.setId(rs.getInt("id"));
 
-                    EmployeeDAO employeeDAO = new EmployeeDAO();
-                    CustomerDAO customerDAO = new CustomerDAO();
-                    CarDAO carDAO = new CarDAO();
-
-                    order.setEmployee(employeeDAO.getEntityById(rs.getInt("employee_id")));
-                    order.setCustomer(customerDAO.getEntityById(rs.getInt("customer_id")));
-                    order.setCar(carDAO.getEntityById(rs.getInt("car_id")));
+                    order.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
+                    order.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
+                    order.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
                 }
             } catch (SQLException e) {
                 LOGGER.error("Error retrieving order by ID: ", e);
@@ -173,13 +168,9 @@ public class OrderDAO implements IOrderDAO {
                 Order order = new Order();
                 order.setId(rs.getInt("id"));
 
-                EmployeeDAO employeeDAO = new EmployeeDAO();
-                CustomerDAO customerDAO = new CustomerDAO();
-                CarDAO carDAO = new CarDAO();
-
-                order.setEmployee(employeeDAO.getEntityById(employeeId));
-                order.setCustomer(customerDAO.getEntityById(rs.getInt("customer_id")));
-                order.setCar(carDAO.getEntityById(rs.getInt("car_id")));
+                order.setEmployee(new EmployeeDAO().getEntityById(employeeId));
+                order.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
+                order.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
 
                 orders.add(order);
             }

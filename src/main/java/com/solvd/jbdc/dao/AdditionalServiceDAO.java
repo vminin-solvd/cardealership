@@ -26,7 +26,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
             ps.setString(2, additionalService.getServiceType().getServiceType());
             ps.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.info("Error saving car sale entity: ", e);
+            LOGGER.info("Error saving additional service entity: ", e);
         } finally {
             if (connection != null) {
                 try {
@@ -49,8 +49,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
                 while (rs.next()) {
                     AdditionalService additionalService = new AdditionalService();
                     additionalService.setId(rs.getInt("id"));
-                    ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
-                    additionalService.setServiceType(serviceTypeDAO.getServiceTypeByName(rs.getString("service_type")));
+                    additionalService.setServiceType(new ServiceTypeDAO().getServiceTypeByName(rs.getString("service_type")));
                     additionalServiceList.add(additionalService);
                 }
             }
@@ -80,8 +79,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     additionalService.setId(rs.getInt("id"));
-                    ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
-                    additionalService.setServiceType(serviceTypeDAO.getServiceTypeByName(rs.getString("serviceType")));
+                    additionalService.setServiceType(new ServiceTypeDAO().getServiceTypeByName(rs.getString("serviceType")));
                 }
             }
         } catch (SQLException e) {
@@ -150,8 +148,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     additionalService.setId(rs.getInt("id"));
-                    ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
-                    additionalService.setServiceType(serviceTypeDAO.getServiceTypeByName(rs.getString("serviceType")));
+                    additionalService.setServiceType(new ServiceTypeDAO().getServiceTypeByName(rs.getString("serviceType")));
                 }
             }
         } catch (SQLException e) {
