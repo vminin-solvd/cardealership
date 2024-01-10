@@ -1,12 +1,12 @@
 package com.solvd.services;
 
-import com.solvd.interfaces.iPositionDAO;
+import com.solvd.interfaces.IPositionDAO;
 import com.solvd.jbdc.dao.PositionDAO;
 import com.solvd.models.Position;
 
 import java.util.List;
 
-public class PositionService implements iPositionDAO {
+public class PositionService implements IPositionDAO {
 
     PositionDAO positionDAO = new PositionDAO();
 

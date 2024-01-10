@@ -5,11 +5,12 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DBConfig {
+
     private static final Properties properties;
 
     static {
         properties = new Properties();
-        try(InputStream inputStream = DBConfig.class.getResourceAsStream("/db,properties")) {
+        try (InputStream inputStream = DBConfig.class.getResourceAsStream("/db.properties")) {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace(); // FIXME Replace with LOGGER

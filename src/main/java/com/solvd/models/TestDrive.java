@@ -3,14 +3,12 @@ package com.solvd.models;
 import java.sql.Date;
 
 public class TestDrive {
-    private int id;
-    private Date date;// (DATETIME)
-    private int carId;
-    private int customerId;
-    private int employeeId;
 
-    public TestDrive() {
-    }
+    private int id;
+    private Date date;
+    private Car car;
+    private Customer customer;
+    private Employee employee;
 
     public int getId() {
         return id;
@@ -28,28 +26,28 @@ public class TestDrive {
         this.date = date;
     }
 
-    public int getCarId() {
-        return carId;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -57,9 +55,9 @@ public class TestDrive {
         return "TestDrive{" +
                 "id=" + id +
                 ", date=" + date +
-                ", carId=" + carId +
-                ", customerId=" + customerId +
-                ", employeeId=" + employeeId +
+                ", car=" + car +
+                ", customer=" + customer +
+                ", employee=" + employee +
                 '}';
     }
 }

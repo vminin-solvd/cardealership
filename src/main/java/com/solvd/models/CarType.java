@@ -1,11 +1,9 @@
 package com.solvd.models;
 
 public class CarType {
+
     private int id;
     private String carType;
-
-    public CarType() {
-    }
 
     public int getId() {
         return id;
