@@ -11,7 +11,7 @@ import java.util.List;
 
 public class OrderDAO implements IOrderDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(OrderDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IOrderDAO myBatisDAO;
 

@@ -18,7 +18,7 @@ import java.util.List;
 
 public class OrderDAO implements IOrderDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(CarSaleDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(OrderDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     @Override

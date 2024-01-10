@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ManufacturerDAO implements IManufacturerDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(ManufacturerDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IManufacturerDAO myBatisDAO;
 

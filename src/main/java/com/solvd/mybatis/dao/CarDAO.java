@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CarDAO implements ICarDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(CarDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ICarDAO myBatisDAO;
 

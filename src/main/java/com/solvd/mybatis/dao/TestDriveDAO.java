@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TestDriveDAO implements ITestDriveDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(TestDriveDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ITestDriveDAO myBatisDAO;
 

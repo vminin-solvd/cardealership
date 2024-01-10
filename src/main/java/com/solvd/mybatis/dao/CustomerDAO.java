@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CustomerDAO implements ICustomerDAO{
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ICustomerDAO myBatisDAO;
 
