@@ -40,6 +40,7 @@
 
     <resultMap id="AdditionalServiceResultMap" type="com.solvd.models.AdditionalService" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="service_type" property="serviceType"/>
     </resultMap>
 
 </mapper>

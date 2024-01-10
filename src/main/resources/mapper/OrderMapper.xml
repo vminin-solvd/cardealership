@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.jdbc.dao.TestDriveDAO">
+<mapper namespace="com.solvd.jdbc.dao.OrderDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO test_drives(id, service_type)
-        VALUES (#{id}, #{serviceType})
+        INSERT INTO test_drives(id, employee_id, customer_id, car_id)
+        VALUES (#{id}, #{employee.id}, #{customer.id}, #{car.id})
     </insert>
 
     <sql id="select">
-        SELECT * FROM test_drives
+        SELECT * FROM orders
     </sql>
 
     <select id="getEntityById">
@@ -18,9 +18,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getServiceTypeByName">
+    <select id="getOrdersByEmployeeID">
         <include refid="select"/>
-        WHERE service_type = #{serviceType}
+        WHERE employee_id = #{employee.id}
     </select>
 
     <select id="getAll">
@@ -29,17 +29,20 @@
 
     <update id="updateEntity">
         UPDATE test_drives
-        SET service_type = #{serviceType}
-        WHERE id = #{id }
+        SET employee_id = #{employee.id}, customer_id = #{customer.id}, car_id = #{car.id}
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM test_drives
+        DELETE FROM orders
         WHERE id = #{id}
     </delete>
 
     <resultMap id="TestDriveResultMap" type="com.solvd.models.TestDrive" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="customer_id" property="FIX ME "/>
+        <result column="employee_id" property="FIX ME "/>
+        <result column="car_id" property="FIX ME "/>
     </resultMap>
 
 </mapper>

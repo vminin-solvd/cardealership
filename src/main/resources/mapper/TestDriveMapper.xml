@@ -5,8 +5,8 @@
     <mapper namespace="com.solvd.jdbc.dao.TestDriveDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO test_drives(id, service_type)
-        VALUES (#{id}, #{serviceType})
+        INSERT INTO test_drives(id, date, car_id, customer_id, employee_id)
+        VALUES (#{id}, #{date}, #{car.id}, #{customer.id}, #{employee.id})
     </insert>
 
     <sql id="select">
@@ -18,9 +18,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getServiceTypeByName">
+    <select id="getTestDrivesByEmployeeID">
         <include refid="select"/>
-        WHERE service_type = #{serviceType}
+        WHERE employee_id = #{employee.id}
     </select>
 
     <select id="getAll">
@@ -29,8 +29,8 @@
 
     <update id="updateEntity">
         UPDATE test_drives
-        SET service_type = #{serviceType}
-        WHERE id = #{id }
+        SET date = #{date}, car_id = #{car.id}, customer_id = #{customer.id}, employee = #{employee.id}
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
@@ -40,6 +40,11 @@
 
     <resultMap id="TestDriveResultMap" type="com.solvd.models.TestDrive" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="date" property="date"/>
+        <result column="customer_id" property="FIXME"/>
+        <result column="employee_id" property="FIXME"/>
+        <result column="car_id" property="FIXME"/>
+
     </resultMap>
 
 </mapper>

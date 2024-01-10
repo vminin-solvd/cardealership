@@ -30,7 +30,7 @@
     <update id="updateEntity">
         UPDATE customers
         SET first_name = #{firstName}, last_name = #{lastName}
-        WHERE id = #{id }
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
@@ -40,6 +40,8 @@
 
     <resultMap id="CustomerResultMap" type="com.solvd.models.Customer" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
     </resultMap>
 
 </mapper>

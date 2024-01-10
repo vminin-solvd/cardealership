@@ -5,8 +5,8 @@
 <mapper namespace="com.solvd.jdbc.dao.CarSaleDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO car_sales(id, service_type)
-        VALUES (#{id}, #{serviceType})
+        INSERT INTO car_sales(id, customer_id, employee_id, car_id)
+        VALUES (#{id}, #{customer.id}, #{employee.id}, #{car.id})
     </insert>
 
     <sql id="select">
@@ -20,7 +20,7 @@
 
     <select id="getCarSaleByEmployeeId">
         <include refid="select"/>
-        WHERE employee_id = #{employeeId}
+        WHERE employee_id = #{employee.id}
     </select>
 
     <select id="getAll">
@@ -29,7 +29,7 @@
 
     <update id="updateEntity">
         UPDATE car_sales
-        SET FIXME = #{serviceType}
+        SET customer_id = customer.id, employee_id = employee.id, car_id = car.id
         WHERE id = #{id}
     </update>
 
@@ -40,6 +40,9 @@
 
     <resultMap id="CarSaleResultMap" type="com.solvd.models.CarSale" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="customer_id" property="FIXME"/>
+        <result column="employee_id" property="FIXME"/>
+        <result column="car_id" property="FIXME"/>
     </resultMap>
 
 </mapper>

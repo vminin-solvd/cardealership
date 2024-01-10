@@ -40,6 +40,7 @@
 
     <resultMap id="ManufacturerResultMap" type="com.solvd.models.Manufacturer" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="manufacturer_name" property="manufacturerName"/>
     </resultMap>
 
 </mapper>

@@ -5,12 +5,12 @@
 <mapper namespace="com.solvd.jdbc.dao.EmployeeDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO employees(id, service_type)
-        VALUES (#{id}, #{serviceType})
+        INSERT INTO employees(id, first_name, last_name, position_id)
+        VALUES (#{id}, #{firstName}, #{last_name}, #{position.id})
     </insert>
 
     <sql id="select">
-        SELECT * FROM additional_service
+        SELECT * FROM employees
     </sql>
 
     <select id="getEntityById">
@@ -18,9 +18,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getAdditionalServiceByServiceName">
+    <select id="getEmployeeByLastName">
         <include refid="select"/>
-        WHERE service_name = #{serviceName}
+        WHERE last_name = #{lastName}
     </select>
 
     <select id="getAll">
@@ -28,18 +28,21 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE additional_services
-        SET service_type = #{serviceType}
-        WHERE id = #{id }
+        UPDATE employees
+        SET first_name = #{firstName}, last_name = #{lastName}, position_id = #{position.id}
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM additional_services
+        DELETE FROM employees
         WHERE id = #{id}
     </delete>
 
     <resultMap id="EmployeeResultMap" type="com.solvd.models.Employee" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
+        <result column= "position_id" property="FIXME FIXME FIXME"/>
     </resultMap>
 
 </mapper>
