@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CarTypeDAO implements ICarTypeDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(CarSaleDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(CarTypeDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     @Override

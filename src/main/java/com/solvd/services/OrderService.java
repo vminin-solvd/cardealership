@@ -1,14 +1,14 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.IOrderDAO;
-import com.solvd.jbdc.dao.OrderDAO;
+import com.solvd.mybatis.dao.OrderDAO;
 import com.solvd.models.Order;
 
 import java.util.List;
 
 public class OrderService implements IOrderDAO {
 
-    OrderDAO orderDAO = new OrderDAO();
+    private OrderDAO orderDAO = new OrderDAO();
 
     @Override
     public void saveEntity(Order order) {

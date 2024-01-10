@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EmployeeDAO implements IEmployeeDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(EmployeeDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IEmployeeDAO myBatisDAO;
 

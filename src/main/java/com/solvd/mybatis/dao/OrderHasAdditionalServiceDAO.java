@@ -12,7 +12,7 @@ import java.util.List;
 
 public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServicesDAO<OrderHasAdditionalService, AdditionalService> {
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(OrderHasAdditionalServiceDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IOrderHasAdditionalServicesDAO myBatisDAO;
 

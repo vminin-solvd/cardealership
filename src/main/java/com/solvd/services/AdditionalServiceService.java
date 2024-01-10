@@ -1,14 +1,18 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.IAdditionalServiceDAO;
-import com.solvd.jbdc.dao.AdditionalServiceDAO;
+import com.solvd.mybatis.dao.AdditionalServiceDAO;
 import com.solvd.models.AdditionalService;
-
 import java.util.List;
 
 public class AdditionalServiceService implements IAdditionalServiceDAO {
 
-    private static final AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+    private AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+
+    @Override
+    public AdditionalService getAdditionalServiceByServiceName(String serviceName) {
+        return additionalServiceDAO.getAdditionalServiceByServiceName(serviceName);
+    }
 
     @Override
     public void saveEntity(AdditionalService additionalService) {
@@ -32,11 +36,7 @@ public class AdditionalServiceService implements IAdditionalServiceDAO {
 
     @Override
     public List<AdditionalService> getAll() {
-       return additionalServiceDAO.getAll();
-    }
-
-    @Override
-    public AdditionalService getAdditionalServiceByServiceName(String serviceName) {
-       return additionalServiceDAO.getAdditionalServiceByServiceName(serviceName);
+        return additionalServiceDAO.getAll();
     }
 }
+

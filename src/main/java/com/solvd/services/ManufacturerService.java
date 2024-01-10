@@ -1,14 +1,14 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.IManufacturerDAO;
-import com.solvd.jbdc.dao.ManufacturerDAO;
+import com.solvd.mybatis.dao.ManufacturerDAO;
 import com.solvd.models.Manufacturer;
 
 import java.util.List;
 
 public class ManufacturerService implements IManufacturerDAO {
 
-    ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
+    private ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
 
     @Override
     public void saveEntity(Manufacturer manufacturer) {

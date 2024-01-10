@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PositionDAO implements IPositionDAO {
 
-    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+    private final Logger LOGGER = LogManager.getLogger(PositionDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IPositionDAO myBatisDAO;
 

@@ -1,14 +1,14 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.ITestDriveDAO;
-import com.solvd.jbdc.dao.TestDriveDAO;
+import com.solvd.mybatis.dao.TestDriveDAO;
 import com.solvd.models.TestDrive;
 
 import java.util.List;
 
 public class TestDriveService implements ITestDriveDAO {
 
-    TestDriveDAO testDriveDAO = new TestDriveDAO();
+    private TestDriveDAO testDriveDAO = new TestDriveDAO();
 
     @Override
     public void saveEntity(TestDrive testDrive) {
