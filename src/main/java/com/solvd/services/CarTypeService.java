@@ -1,12 +1,12 @@
 package com.solvd.services;
 
-import com.solvd.interfaces.iCarTypeDAO;
+import com.solvd.interfaces.ICarTypeDAO;
 import com.solvd.jbdc.dao.CarTypeDAO;
 import com.solvd.models.CarType;
 
 import java.util.List;
 
-public class CarTypeService implements iCarTypeDAO {
+public class CarTypeService implements ICarTypeDAO {
 
     CarTypeDAO carTypeDAO = new CarTypeDAO();
 

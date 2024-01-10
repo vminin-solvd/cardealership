@@ -2,7 +2,9 @@ package com.solvd.jbdc.dao;
 
 import com.solvd.models.Manufacturer;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iManufacturerDAO;
+import com.solvd.interfaces.IManufacturerDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +13,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManufacturerDAO implements iManufacturerDAO{
+public class ManufacturerDAO implements IManufacturerDAO {
+
+    private final Logger LOGGER = LogManager.getLogger(ManufacturerDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     @Override
     public void saveEntity(Manufacturer manufacturer) {
@@ -20,14 +24,15 @@ public class ManufacturerDAO implements iManufacturerDAO{
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, manufacturer.getId());
             ps.setString(2, manufacturer.getManufacturerName());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error saving manufacturer entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error closing connection: ",e);
                 }
             }
         }
@@ -37,29 +42,29 @@ public class ManufacturerDAO implements iManufacturerDAO{
     public List<Manufacturer> getAll(){
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM manufacturers";
-        List<Manufacturer> Manufacturers = new ArrayList<>();
+        List<Manufacturer> manufacturers = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.execute();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Manufacturer Manufacturer = new Manufacturer();
-                    Manufacturer.setId(rs.getInt("id"));
-                    Manufacturer.setManufacturerName(rs.getString("manufacturer_name"));// FIXME
-                    Manufacturers.add(Manufacturer);
+                    Manufacturer manufacturer = new Manufacturer();
+                    manufacturer.setId(rs.getInt("id"));
+                    manufacturer.setManufacturerName(rs.getString("manufacturer_name"));
+                    manufacturers.add(manufacturer);
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error: getting all manufacturer entities: ",e);
         } finally {
             if( connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
-        return Manufacturers;
+        return manufacturers;
     }
 
 
@@ -78,36 +83,35 @@ public class ManufacturerDAO implements iManufacturerDAO{
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error getting manufacturer entity by ID: ",e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection((connection));
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
-
-
         return Manufacturer;
     }
 
     @Override
-    public void updateEntity(Manufacturer Manufacturer) {
+    public void updateEntity(Manufacturer manufacturer) {
         Connection connection = connectionPool.getConnection();
         String query = "UPDATE manufacturers SET manufacturer_name = (?) WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(2, Manufacturer.getManufacturerName());
-            ps.setInt(1, Manufacturer.getId());
+            ps.setString(2, manufacturer.getManufacturerName());
+            ps.setInt(1, manufacturer.getId());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error updating manufacturer entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -121,19 +125,46 @@ public class ManufacturerDAO implements iManufacturerDAO{
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error removing manufacturer entity by ID: ",e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
     }
+
     @Override
     public Manufacturer getManufacturerByName(String manufacturerName) {
-        return null;
+        Connection connection = connectionPool.getConnection();
+        String query = "SELECT FROM manufacturers WHERE manufacturer_name = (?)";
+        Manufacturer manufacturer = null;
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, manufacturerName);
+            ps.execute();
+            try (ResultSet rs = ps.getResultSet()) {
+                while (rs.next()) {
+                    manufacturer = new Manufacturer();
+                    manufacturer.setId(rs.getInt("id"));
+                    manufacturer.setManufacturerName(rs.getString("manufacturer_name"));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Error getting manufacturer entity by name: ",e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connectionPool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.info("Error releasing connection: ", e);
+                }
+            }
+        }
+        return manufacturer;
     }
 }
+

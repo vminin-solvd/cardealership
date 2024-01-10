@@ -1,14 +1,15 @@
 package com.solvd.services;
 
-import com.solvd.interfaces.iCustomerDAO;
+import com.solvd.interfaces.ICustomerDAO;
 import com.solvd.jbdc.dao.CustomerDAO;
 import com.solvd.models.Customer;
 
 import java.util.List;
 
-public class CustomerService implements iCustomerDAO {
+public class CustomerService implements ICustomerDAO {
 
     CustomerDAO customerDAO = new CustomerDAO();
+
     @Override
     public void saveEntity(Customer customer) {
         customerDAO.saveEntity(customer);
@@ -36,6 +37,6 @@ public class CustomerService implements iCustomerDAO {
 
     @Override
     public Customer getCustomerByFirstName(String firstName) {
-        return customerDAO.getCustomerByFirstName(f);
+        return customerDAO.getCustomerByFirstName(firstName);
     }
 }

@@ -4,6 +4,6 @@ import com.solvd.models.TestDrive;
 
 import java.util.List;
 
-public interface iTestDriveDAO extends IBaseDAO<TestDrive> {
+public interface ITestDriveDAO extends IBaseDAO<TestDrive> {
 List<TestDrive> getTestDrivesByEmployeeID(int id);
 }

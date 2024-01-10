@@ -2,7 +2,9 @@ package com.solvd.jbdc.dao;
 
 import com.solvd.models.AdditionalService;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iAdditionalServiceDAO;
+import com.solvd.interfaces.IAdditionalServiceDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +13,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdditionalServiceDAO implements iAdditionalServiceDAO {
+public class AdditionalServiceDAO implements IAdditionalServiceDAO {
+
+    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     @Override
@@ -20,15 +24,16 @@ public class AdditionalServiceDAO implements iAdditionalServiceDAO {
         String query = "INSERT INTO additional_service (id, service_type) VALUES ((?), (?))";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, additionalService.getId());
-            ps.setString(2, additionalService.getServiceType());
+            ps.setString(2, additionalService.getServiceType().getServiceType());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error saving additional service entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -45,18 +50,18 @@ public class AdditionalServiceDAO implements iAdditionalServiceDAO {
                 while (rs.next()) {
                     AdditionalService additionalService = new AdditionalService();
                     additionalService.setId(rs.getInt("id"));
-                    additionalService.setServiceType(rs.getString("service_type"));// FIXME
+                    additionalService.setServiceType(new ServiceTypeDAO().getServiceTypeByName(rs.getString("service_type")));
                     additionalServiceList.add(additionalService);
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error getting all additional services: ", e);
         } finally {
             if( connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -75,22 +80,20 @@ public class AdditionalServiceDAO implements iAdditionalServiceDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     additionalService.setId(rs.getInt("id"));
-                    additionalService.setServiceType(rs.getString("serviceType"));
+                    additionalService.setServiceType(new ServiceTypeDAO().getServiceTypeByName(rs.getString("serviceType")));
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error getting additional service entity by ID: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection((connection));
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
-
-
         return additionalService;
     }
 
@@ -99,16 +102,16 @@ public class AdditionalServiceDAO implements iAdditionalServiceDAO {
         Connection connection = connectionPool.getConnection();
         String query = "UPDATE additional_services SET service_type = (?) WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, additionalService.getServiceType());
+            ps.setString(1, additionalService.getServiceType().getServiceType());
             ps.setInt(2, additionalService.getId());
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error updating additional service entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -122,13 +125,13 @@ public class AdditionalServiceDAO implements iAdditionalServiceDAO {
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error removing additional service entity by ID: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -141,22 +144,22 @@ public class AdditionalServiceDAO implements iAdditionalServiceDAO {
         AdditionalService additionalService = null;
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(2, serviceName);
+            ps.setString(1, serviceName);
             ps.execute();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     additionalService.setId(rs.getInt("id"));
-                    additionalService.setServiceType(rs.getString("serviceType"));
+                    additionalService.setServiceType(new ServiceTypeDAO().getServiceTypeByName(rs.getString("serviceType")));
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info(e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }

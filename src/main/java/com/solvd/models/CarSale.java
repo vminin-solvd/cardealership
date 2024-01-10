@@ -1,17 +1,11 @@
 package com.solvd.models;
 
 public class CarSale {
-    private int id;
-    private int customerId;
-    private int employeeId;
-    private int carId;
 
-    public CarSale(int id, int customerId, int employeeId, int carId) {
-        this.id = id;
-        this.customerId = customerId;
-        this.employeeId = employeeId;
-        this.carId = carId;
-    }
+    private int id;
+    private Customer customer;
+    private Employee employee;
+    private Car car;
 
     public int getId() {
         return id;
@@ -21,37 +15,37 @@ public class CarSale {
         this.id = id;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public int getCarId() {
-        return carId;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override
     public String toString() {
         return "CarSale{" +
                 "id=" + id +
-                ", customerId=" + customerId +
-                ", employeeId=" + employeeId +
-                ", carId=" + carId +
+                ", customer=" + customer +
+                ", employee=" + employee +
+                ", car=" + car +
                 '}';
     }
 }

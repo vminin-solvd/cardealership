@@ -1,14 +1,15 @@
 package com.solvd.services;
 
-import com.solvd.interfaces.iAdditionalServiceDAO;
+import com.solvd.interfaces.IAdditionalServiceDAO;
 import com.solvd.jbdc.dao.AdditionalServiceDAO;
 import com.solvd.models.AdditionalService;
-import com.solvd.util.ConnectionPool;
 
 import java.util.List;
 
-public class AdditionalServiceService implements iAdditionalServiceDAO {
-   private static final AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+public class AdditionalServiceService implements IAdditionalServiceDAO {
+
+    private static final AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+
     @Override
     public void saveEntity(AdditionalService additionalService) {
         additionalServiceDAO.saveEntity(additionalService);

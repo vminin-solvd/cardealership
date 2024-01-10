@@ -1,12 +1,12 @@
 package com.solvd.services;
 
-import com.solvd.interfaces.iOrderDAO;
+import com.solvd.interfaces.IOrderDAO;
 import com.solvd.jbdc.dao.OrderDAO;
 import com.solvd.models.Order;
 
 import java.util.List;
 
-public class OrderService implements iOrderDAO {
+public class OrderService implements IOrderDAO {
 
     OrderDAO orderDAO = new OrderDAO();
 
@@ -32,11 +32,11 @@ public class OrderService implements iOrderDAO {
 
     @Override
     public List<Order> getAll() {
-        return ;
+        return orderDAO.getAll();
     }
 
     @Override
     public List<Order> getOrdersByEmployeeID(int id) {
-        return null;
+        return orderDAO.getOrdersByEmployeeID(id);
     }
 }

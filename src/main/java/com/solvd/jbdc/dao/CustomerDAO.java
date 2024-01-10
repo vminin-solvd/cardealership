@@ -2,7 +2,9 @@ package com.solvd.jbdc.dao;
 
 import com.solvd.models.Customer;
 import com.solvd.util.ConnectionPool;
-import com.solvd.interfaces.iCustomerDAO;
+import com.solvd.interfaces.ICustomerDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +13,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerDAO implements iCustomerDAO {
+public class CustomerDAO implements ICustomerDAO {
+
+    private final Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     public void saveEntity(Customer customer) {
@@ -21,14 +25,15 @@ public class CustomerDAO implements iCustomerDAO {
             ps.setInt(1, customer.getId());
             ps.setString(2, customer.getFirstName());
             ps.setString(3, customer.getLastName());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error saving customer entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -38,30 +43,30 @@ public class CustomerDAO implements iCustomerDAO {
     public List<Customer> getAll(){
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM customers";
-        List<Customer> Customers = new ArrayList<>();
+        List<Customer> customers = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.execute();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Customer Customer = new Customer();
-                    Customer.setId(rs.getInt("id"));
-                    Customer.setFirstName(rs.getString("first_name"));// FIXME
-                    Customer.setLastName(rs.getString("last_name"));// FIXME
-                    Customers.add(Customer);
+                    Customer customer = new Customer();
+                    customer.setId(rs.getInt("id"));
+                    customer.setFirstName(rs.getString("first_name"));
+                    customer.setLastName(rs.getString("last_name"));
+                    customers.add(customer);
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error getting all customer entities: ", e);
         } finally {
             if( connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
-        return Customers;
+        return customers;
     }
 
 
@@ -76,42 +81,41 @@ public class CustomerDAO implements iCustomerDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     customer.setId(rs.getInt("id"));
-                    customer.setFirstName(rs.getString("first_name"));// FIXME
-                    customer.setLastName(rs.getString("last_name"));// FIXME
+                    customer.setFirstName(rs.getString("first_name"));
+                    customer.setLastName(rs.getString("last_name"));
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error getting customer entity by ID: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection((connection));
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
-
-
         return customer;
     }
 
     @Override
     public void updateEntity(Customer customer) {
         Connection connection = connectionPool.getConnection();
-        String query = "UPDATE customers SET first_name = (?) AND last_name = (?) WHERE id = (?)"; // FIXME MUST UPDATE LASTNAME ALSO
+        String query = "UPDATE customers SET first_name = (?), last_name = (?) WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, customer.getFirstName());
             ps.setString(2, customer.getLastName());
             ps.setInt(2, customer.getId());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error updating customer entity: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -125,13 +129,13 @@ public class CustomerDAO implements iCustomerDAO {
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e); // FIXME Replace with LOGGER
+            LOGGER.info("Error removing customer entity by ID: ", e);
         } finally {
             if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
-                    System.out.println(e); // FIXME Replace with LOGGER
+                    LOGGER.info("Error releasing connection: ", e);
                 }
             }
         }
@@ -139,6 +143,32 @@ public class CustomerDAO implements iCustomerDAO {
 
     @Override
     public Customer getCustomerByFirstName(String firstName) {
-        return null;
+        Connection connection = connectionPool.getConnection();
+        String query = "SELECT FROM customers WHERE first_name = (?)";
+        Customer customer = null;
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, firstName);
+            ps.execute();
+            try (ResultSet rs = ps.getResultSet()) {
+                while (rs.next()) {
+                    customer = new Customer();
+                    customer.setId(rs.getInt("id"));
+                    customer.setFirstName(rs.getString("first_name"));
+                    customer.setLastName(rs.getString("last_name"));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Error getting customer entity by first name: ", e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connectionPool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.info("Error releasing connection: ", e);
+                }
+            }
+        }
+        return customer;
     }
 }
