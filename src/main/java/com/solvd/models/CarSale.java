@@ -1,6 +1,7 @@
 package com.solvd.models;
 
 public class CarSale {
+
     private int id;
     private Customer customer;
     private Employee employee;

@@ -5,7 +5,7 @@ import com.solvd.models.OrderHasAdditionalService;
 
 import java.util.List;
 
-public interface IOrderHasAdditionalServices<OrderHasAdditionalServices, AdditionalServices> extends IBaseDAO<OrderHasAdditionalService> {
+public interface IOrderHasAdditionalServicesDAO<OrderHasAdditionalServices, AdditionalServices> extends IBaseDAO<OrderHasAdditionalService> {
     List<AdditionalService> getAllServicesById(int id);
 
 }

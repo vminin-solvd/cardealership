@@ -1,6 +1,7 @@
 package com.solvd.models;
 
 public class ServiceType {
+
     private int id;
     private String serviceType;
 

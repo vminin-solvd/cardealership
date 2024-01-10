@@ -1,6 +1,7 @@
 package com.solvd.models;
 
 public class OrderHasAdditionalService {
+
     private Order order;
     private AdditionalService additionalService;
 

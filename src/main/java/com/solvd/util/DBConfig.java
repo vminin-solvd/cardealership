@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DBConfig {
+
     private static final Properties properties;
 
     static {
@@ -12,7 +13,7 @@ public class DBConfig {
         try (InputStream inputStream = DBConfig.class.getResourceAsStream("/db.properties")) {
             properties.load(inputStream);
         } catch (IOException e) {
-            e.printStackTrace(); // FIXME Replace with LOGGER
+            e.printStackTrace();
         }
     }
 

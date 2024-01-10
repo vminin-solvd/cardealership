@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PositionDAO implements IPositionDAO {
-    private static final Logger LOGGER = LogManager.getLogger(PositionDAO.class);
+
+    private final Logger LOGGER = LogManager.getLogger(PositionDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     public void saveEntity(Position position) {
