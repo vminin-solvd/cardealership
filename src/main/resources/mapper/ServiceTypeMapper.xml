@@ -30,7 +30,7 @@
     <update id="updateEntity">
         UPDATE service_types
         SET service_type = #{serviceType}
-        WHERE id = #{id }
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
@@ -40,6 +40,7 @@
 
     <resultMap id="ServiceTypeResultMap" type="com.solvd.models.ServiceType" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="service_type" property="serviceType"/>
     </resultMap>
 
 </mapper>

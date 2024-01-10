@@ -40,6 +40,7 @@
 
     <resultMap id="CarTypeResultMap" type="com.solvd.models.CarType" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="car_type" property="carType"/>
     </resultMap>
 
 </mapper>

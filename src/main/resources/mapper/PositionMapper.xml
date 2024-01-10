@@ -40,6 +40,7 @@
 
     <resultMap id="PositionResultMap" type="com.solvd.models.Position" autoMapping="false">
         <id column="id" property="id"/>
+        <result column="position_name" property="positionName"/>
     </resultMap>
 
 </mapper>

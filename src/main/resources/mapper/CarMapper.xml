@@ -4,10 +4,9 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.jdbc.dao.CarDAO">
 
-    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">// FIXME THIS ONE TO MANY
-        RELATIONSHIP
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO cars (price, model, year, is_sold, car_type_id, manufacturer_id)
-        VALUES (#{price}, #{model}, #{year}, #{is_sold}, #{car_type_id}, #{manufacturer_id})
+        VALUES (#{price}, #{model}, #{year}, #{is_sold}, #{carType.id}, #{manufacturer.id})
     </insert>
 
     <sql id="select">
@@ -30,8 +29,8 @@
 
     <update id="updateEntity">
         UPDATE cars
-        SET service_type = #{serviceType}
-        WHERE id = #{id }
+        SET price = #{price}, model = #{model}, year = #{year}, is_sold = #{is_sold}, car_type_id #{carType.id}, manufacturer = #{manufacturer.id}
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
@@ -41,6 +40,12 @@
 
     <resultMap id="CarResultMap" type="com.solvd.models.Car" autoMapping="false">
         <id column="id" property="id"/>
-    </resultMap>
+        <result column="price" property="price"/>
+        <result column="model" property="model"/>
+        <result column="year" property="year"/>
+        <result column="is_sold" property="isSold"/>
+        <result column="car_type_id" property="FIXME"/>
+        <result column="manufacturer_id" property="FIXME"/>
+   </resultMap>
 
 </mapper>
