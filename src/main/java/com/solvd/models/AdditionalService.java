@@ -1,8 +1,9 @@
 package com.solvd.models;
 
 public class AdditionalService {
-private int id;
-private ServiceType serviceType;
+
+    private int id;
+    private ServiceType serviceType;
 
     public int getId() {
         return id;

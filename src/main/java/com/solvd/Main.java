@@ -8,6 +8,7 @@ import com.solvd.services.OrderService;
 import java.util.List;
 
 public class Main {
+
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {

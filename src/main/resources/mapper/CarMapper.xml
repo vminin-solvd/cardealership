@@ -6,8 +6,8 @@
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">// FIXME THIS ONE TO MANY
         RELATIONSHIP
-        INSERT INTO cars (price, model, year, is_sold, car_type_id, manufacturer_id) VALUES (#{price}, #{model},
-        #{year}, #{is_sold}, #{car_type_id}, #{manufacturer_id})
+        INSERT INTO cars (price, model, year, is_sold, car_type_id, manufacturer_id)
+        VALUES (#{price}, #{model}, #{year}, #{is_sold}, #{car_type_id}, #{manufacturer_id})
     </insert>
 
     <sql id="select">
@@ -19,9 +19,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getAdditionalServiceByServiceName">
+    <select id="getCarsByModel">
         <include refid="select"/>
-        WHERE service_name = #{serviceName}
+        WHERE model = #{model}
     </select>
 
     <select id="getAll">
@@ -29,14 +29,17 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE additional_services SET service_type = #{serviceType} where id = #{id }
+        UPDATE cars
+        SET service_type = #{serviceType}
+        WHERE id = #{id }
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM additional_services WHERE id = #{id}
+        DELETE FROM cars
+        WHERE id = #{id}
     </delete>
 
-    <resultMap id="AdditionalServiceResultMap" type="com.solvd.models.AdditionalService" autoMapping="false">
+    <resultMap id="CarResultMap" type="com.solvd.models.Car" autoMapping="false">
         <id column="id" property="id"/>
     </resultMap>
 

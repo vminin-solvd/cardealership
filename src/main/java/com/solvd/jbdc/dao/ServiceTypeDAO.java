@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceTypeDAO implements IServiceTypeDAO {
-    private static final Logger LOGGER = LogManager.getLogger(ServiceTypeDAO.class);
+
+    private final Logger LOGGER = LogManager.getLogger(ServiceTypeDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     public void saveEntity(ServiceType serviceType) {

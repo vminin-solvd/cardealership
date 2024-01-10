@@ -5,7 +5,8 @@
 <mapper namespace="com.solvd.jdbc.dao.CarTypeDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO car_types(id, car_type) values (#{id}, #{carType})
+        INSERT INTO car_types(id, car_type)
+        VALUES (#{id}, #{carType})
     </insert>
 
     <sql id="select">
@@ -27,11 +28,14 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE car_types SET car_type = #{carType} where id = #{id }
+        UPDATE car_types
+        SET car_type = #{carType}
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM car_types WHERE id = #{id}
+        DELETE FROM car_types
+        WHERE id = #{id}
     </delete>
 
     <resultMap id="CarTypeResultMap" type="com.solvd.models.CarType" autoMapping="false">

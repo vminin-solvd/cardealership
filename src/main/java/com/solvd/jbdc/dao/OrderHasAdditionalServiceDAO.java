@@ -1,6 +1,6 @@
 package com.solvd.jbdc.dao;
 
-import com.solvd.interfaces.IOrderHasAdditionalServices;
+import com.solvd.interfaces.IOrderHasAdditionalServicesDAO;
 import com.solvd.models.AdditionalService;
 import com.solvd.models.Order;
 import com.solvd.models.OrderHasAdditionalService;
@@ -15,8 +15,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices<OrderHasAdditionalService, AdditionalService> {
-    private static final Logger LOGGER = LogManager.getLogger(OrderHasAdditionalServiceDAO.class);
+public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServicesDAO<OrderHasAdditionalService, AdditionalService> {
+
+    private final Logger LOGGER = LogManager.getLogger(OrderHasAdditionalServiceDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     private OrderDAO orderDAO = new OrderDAO();
     private AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();

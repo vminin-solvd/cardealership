@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdditionalServiceDAO implements IAdditionalServiceDAO {
-    private static final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
+
+    private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     @Override

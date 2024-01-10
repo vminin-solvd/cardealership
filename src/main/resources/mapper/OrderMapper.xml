@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.jdbc.dao.TestDriveDAO">
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO test_drives(id, service_type)
+        VALUES (#{id}, #{serviceType})
+    </insert>
+
+    <sql id="select">
+        SELECT * FROM test_drives
+    </sql>
+
+    <select id="getEntityById">
+        <include refid="select"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getServiceTypeByName">
+        <include refid="select"/>
+        WHERE service_type = #{serviceType}
+    </select>
+
+    <select id="getAll">
+        <include refid="select"/>
+    </select>
+
+    <update id="updateEntity">
+        UPDATE test_drives
+        SET service_type = #{serviceType}
+        WHERE id = #{id }
+    </update>
+
+    <delete id="removeEntityById">
+        DELETE FROM test_drives
+        WHERE id = #{id}
+    </delete>
+
+    <resultMap id="TestDriveResultMap" type="com.solvd.models.TestDrive" autoMapping="false">
+        <id column="id" property="id"/>
+    </resultMap>
+
+</mapper>

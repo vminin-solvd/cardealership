@@ -1,10 +1,11 @@
 package com.solvd.models;
 
 public class Car {
+
     private int id;
     private int price;
     private String model;
-    private String year; // what type should this be? YEAR?
+    private String year;
     private boolean isSold;
     private CarType carType;
     private Manufacturer manufacturer;

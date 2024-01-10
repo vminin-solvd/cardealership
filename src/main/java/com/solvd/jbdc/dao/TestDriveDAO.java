@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDriveDAO implements ITestDriveDAO {
+
+    private final Logger LOGGER = LogManager.getLogger(TestDriveDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
-    private static final Logger LOGGER = LogManager.getLogger(TestDriveDAO.class);
 
     @Override
     public List<TestDrive> getAll() {

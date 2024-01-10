@@ -5,7 +5,8 @@
 <mapper namespace="com.solvd.jdbc.dao.ServiceTypeDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO service_types(id, service_type) values (#{id}, #{serviceType})
+        INSERT INTO service_types(id, service_type)
+        VALUES (#{id}, #{serviceType})
     </insert>
 
     <sql id="select">
@@ -27,11 +28,14 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE service_types SET service_type = #{serviceType} where id = #{id }
+        UPDATE service_types
+        SET service_type = #{serviceType}
+        WHERE id = #{id }
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM service_types WHERE id = #{id}
+        DELETE FROM service_types
+        WHERE id = #{id}
     </delete>
 
     <resultMap id="ServiceTypeResultMap" type="com.solvd.models.ServiceType" autoMapping="false">

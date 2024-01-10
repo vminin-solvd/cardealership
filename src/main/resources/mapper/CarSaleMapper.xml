@@ -5,11 +5,12 @@
 <mapper namespace="com.solvd.jdbc.dao.CarSaleDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO car_sales(id, service_type) values (#{id}, #{serviceType})
+        INSERT INTO car_sales(id, service_type)
+        VALUES (#{id}, #{serviceType})
     </insert>
 
     <sql id="select">
-        SELECT * FROM additional_service
+        SELECT * FROM car_sales
     </sql>
 
     <select id="getEntityById">
@@ -17,9 +18,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getAdditionalServiceByServiceName">
+    <select id="getCarSaleByEmployeeId">
         <include refid="select"/>
-        WHERE service_name = #{serviceName}
+        WHERE employee_id = #{employeeId}
     </select>
 
     <select id="getAll">
@@ -27,14 +28,17 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE additional_services SET service_type = #{serviceType} where id = #{id }
+        UPDATE car_sales
+        SET FIXME = #{serviceType}
+        WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM additional_services WHERE id = #{id}
+        DELETE FROM car_sales
+        WHERE id = #{id}
     </delete>
 
-    <resultMap id="AdditionalServiceResultMap" type="com.solvd.models.AdditionalService" autoMapping="false">
+    <resultMap id="CarSaleResultMap" type="com.solvd.models.CarSale" autoMapping="false">
         <id column="id" property="id"/>
     </resultMap>
 

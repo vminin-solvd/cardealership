@@ -5,7 +5,8 @@
 <mapper namespace="com.solvd.jdbc.dao.PositionDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO positions(id, position_name) values (#{id}, #{positionName})
+        INSERT INTO positions(id, position_name)
+        VALUES (#{id}, #{positionName})
     </insert>
 
     <sql id="select">
@@ -27,11 +28,14 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE positions SET position_name = #{positionName} where id = #{id }
+        UPDATE positions
+        SET position_name = #{positionName}
+        WHERE id = #{id }
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM positions WHERE id = #{id}
+        DELETE FROM positions
+        WHERE id = #{id}
     </delete>
 
     <resultMap id="PositionResultMap" type="com.solvd.models.Position" autoMapping="false">
