@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.mybatis.dao.OrderHasAdditionalServiceDAO">
+
+    <resultMap id="OrderHasAdditionalServiceResultMap" type="com.solvd.models.OrderHasAdditionalService" autoMapping="false">
+        <id column="id" property="id"/>
+        <association property = "additionalService" resultMap = "com.solvd.mybatis.dao.AdditionalServiceDAO.AdditionalServiceResultMap"/>
+        <association property = "order" resultMap = "com.solvd.mybatis.dao.OrderDAO.OrderResultMap"/>
+    </resultMap>
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO order_has_additional_services(order_id, additional_service_id)
+        VALUES (#{order.id}, #{additionalService.id})
+    </insert>
+
+    <sql id="select">
+        SELECT * FROM order_has_additional_services
+    </sql>
+
+    <select id="getEntityById" resultMap="OrderHasAdditionalServiceResultMap">
+        <include refid="select"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getAllServicesById" resultMap="OrderHasAdditionalServiceResultMap">
+        <include refid="select"/>
+        WHERE employee_id = #{employee.id}
+    </select>
+
+    <select id="getAll" resultMap="OrderHasAdditionalServiceResultMap">
+        <include refid="select"/>
+    </select>
+
+    <update id="updateEntity">
+        UPDATE order_has_additional_services
+        SET order_id = #{order.id}, additional_service_id = #{additionalService.id}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="removeEntityById">
+        DELETE FROM order_has_additional_services
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

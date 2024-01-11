@@ -1,14 +1,14 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.IServiceTypeDAO;
-import com.solvd.jbdc.dao.ServiceTypeDAO;
+import com.solvd.mybatis.dao.ServiceTypeDAO;
 import com.solvd.models.ServiceType;
 
 import java.util.List;
 
 public class ServiceTypeService implements IServiceTypeDAO {
 
-    ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
+    private ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
 
     @Override
     public void saveEntity(ServiceType serviceType) {

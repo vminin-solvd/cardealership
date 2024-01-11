@@ -2,10 +2,10 @@ package com.solvd.models;
 
 public class Order {
 
-private int id;
-private Employee employee;
-private Customer customer;
-private Car car;
+    private int id;
+    private Employee employee;
+    private Customer customer;
+    private Car car;
 
     public int getId() {
         return id;

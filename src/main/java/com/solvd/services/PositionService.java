@@ -1,14 +1,14 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.IPositionDAO;
-import com.solvd.jbdc.dao.PositionDAO;
+import com.solvd.mybatis.dao.PositionDAO;
 import com.solvd.models.Position;
 
 import java.util.List;
 
 public class PositionService implements IPositionDAO {
 
-    PositionDAO positionDAO = new PositionDAO();
+    private PositionDAO positionDAO = new PositionDAO();
 
     @Override
     public void saveEntity(Position position) {

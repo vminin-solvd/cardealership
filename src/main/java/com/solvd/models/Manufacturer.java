@@ -5,8 +5,7 @@ public class Manufacturer {
     private int id;
     private String manufacturerName;
 
-    public Manufacturer() {
-    }
+    public Manufacturer() {}
 
     public void setId(int id) {
         this.id = id;
