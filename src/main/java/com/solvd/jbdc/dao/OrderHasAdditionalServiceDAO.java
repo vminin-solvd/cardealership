@@ -47,6 +47,7 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
     public OrderHasAdditionalService getEntityById(int id) {
         String query = "SELECT * FROM orders_has_additional_services WHERE order_id = (?)";
         Connection connection = connectionPool.getConnection();
+        OrderHasAdditionalService orderHasAdditionalService = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.execute();
@@ -54,7 +55,10 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
                 while (rs.next()) {
                     Order order = orderDAO.getEntityById(rs.getInt("order_id"));
                     AdditionalService additionalService = additionalServiceDAO.getEntityById(rs.getInt("additional_service_id"));
-                    return new OrderHasAdditionalService(order, additionalService);
+                    orderHasAdditionalService = new OrderHasAdditionalService();
+                    orderHasAdditionalService.setOrder(order);
+                    orderHasAdditionalService.setAdditionalService(additionalService);
+
                 }
             }
         } catch (SQLException e) {
@@ -68,7 +72,7 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
                 }
             }
         }
-        return null;
+        return orderHasAdditionalService;
     }
 
     @Override
@@ -126,7 +130,9 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
                 while (rs.next()) {
                     Order order = orderDAO.getEntityById(rs.getInt("order_id"));
                     AdditionalService additionalService = additionalServiceDAO.getEntityById(rs.getInt("additional_service_id"));
-                    OrderHasAdditionalService orderHasAdditionalService = new OrderHasAdditionalService(order, additionalService);
+                    OrderHasAdditionalService orderHasAdditionalService = new OrderHasAdditionalService();
+                    orderHasAdditionalService.setOrder(order);
+                    orderHasAdditionalService.setAdditionalService(additionalService);
                     orderHasAdditionalServices.add(orderHasAdditionalService);
                 }
             }

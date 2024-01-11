@@ -13,17 +13,17 @@
         SELECT * FROM cars
     </sql>
 
-    <select id="getEntityById">
+    <select id="getEntityById" resultMap = "CarResultMap">
         <include refid="select"/>
         WHERE id = #{id}
     </select>
 
-    <select id="getCarsByModel">
+    <select id="getCarsByModel" resultMap = "CarResultMap">
         <include refid="select"/>
         WHERE model = #{model}
     </select>
 
-    <select id="getAll">
+    <select id="getAll" resultMap = "CarResultMap">
         <include refid="select"/>
     </select>
 
@@ -44,8 +44,8 @@
         <result column="model" property="model"/>
         <result column="year" property="year"/>
         <result column="is_sold" property="isSold"/>
-        <result column="car_type_id" property="FIXME"/>
-        <result column="manufacturer_id" property="FIXME"/>
+        <association property="carType" resultMap="com.solvd.jdbc.dao.CarTypeDAO.CarTypeResultMap"/>
+        <association property="manufacturer" resultMap="com.solvd.jdbc.dao.ManufacturerDAO.ManufacturerResultMap"/>
    </resultMap>
 
 </mapper>
