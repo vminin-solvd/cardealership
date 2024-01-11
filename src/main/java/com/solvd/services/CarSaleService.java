@@ -1,14 +1,13 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.ICarSaleDAO;
-import com.solvd.jbdc.dao.CarSaleDAO;
+import com.solvd.mybatis.dao.CarSaleDAO;
 import com.solvd.models.CarSale;
-
 import java.util.List;
 
 public class CarSaleService implements ICarSaleDAO {
 
-    CarSaleDAO carSaleDAO = new CarSaleDAO();
+    private CarSaleDAO carSaleDAO = new CarSaleDAO();
 
     @Override
     public void saveEntity(CarSale carSale) {
@@ -27,7 +26,7 @@ public class CarSaleService implements ICarSaleDAO {
 
     @Override
     public void removeEntityById(int id) {
-        carSaleDAO.removeEntityById(id);
+         carSaleDAO.removeEntityById(id);
     }
 
     @Override

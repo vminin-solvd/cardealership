@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.mybatis.dao.CarSaleDAO">
+
+    <resultMap id="CarSaleResultMap" type="com.solvd.models.CarSale" autoMapping="false">
+        <id column="id" property="id"/>
+        <association property="customer" resultMap="com.solvd.mybatis.dao.CustomerDAO.CustomerResultMap"/>
+        <association property="employee" resultMap="com.solvd.mybatis.dao.EmployeeDAO.EmployeeResultMap"/>
+        <association property="car" resultMap="com.solvd.mybatis.dao.CarDAO.CarResultMap"/>
+    </resultMap>
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO car_sales(id, customer_id, employee_id, car_id)
+        VALUES (#{id}, #{customer.id}, #{employee.id}, #{car.id})
+    </insert>
+
+    <sql id="select all">
+        SELECT * FROM car_sales
+    </sql>
+
+    <select id="getEntityById" resultMap="CarSaleResultMap">
+        <include refid="select all"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getCarSaleByEmployeeId" resultMap="CarSaleResultMap">
+        <include refid="select all"/>
+        WHERE employee_id = #{employee.id}
+    </select>
+
+    <select id="getAll" resultMap="CarSaleResultMap">
+        <include refid="select all"/>
+    </select>
+
+    <update id="updateEntity">
+        UPDATE car_sales
+        SET customer_id = customer.id, employee_id = employee.id, car_id = car.id
+        WHERE id = #{id}
+    </update>
+
+    <delete id="removeEntityById">
+        DELETE FROM car_sales
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,14 +1,14 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.IEmployeeDAO;
-import com.solvd.jbdc.dao.EmployeeDAO;
+import com.solvd.mybatis.dao.EmployeeDAO;
 import com.solvd.models.Employee;
 
 import java.util.List;
 
 public class EmployeeService implements IEmployeeDAO {
 
-    EmployeeDAO employeeDAO = new EmployeeDAO();
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @Override
     public void saveEntity(Employee employee) {

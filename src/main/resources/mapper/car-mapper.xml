@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.mybatis.dao.CarDAO">
+
+    <resultMap id="CarResultMap" type="com.solvd.models.Car" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="price" property="price"/>
+        <result column="model" property="model"/>
+        <result column="year" property="year"/>
+        <result column="is_sold" property="isSold"/>
+        <association property="carType" resultMap="com.solvd.mybatis.dao.CarTypeDAO.CarTypeResultMap"/>
+        <association property="manufacturer" resultMap="com.solvd.jdbc.dao.ManufacturerDAO.ManufacturerResultMap"/>
+    </resultMap>
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO cars (price, model, year, is_sold, car_type_id, manufacturer_id)
+        VALUES (#{price}, #{model}, #{year}, #{is_sold}, #{carType.id}, #{manufacturer.id})
+    </insert>
+
+    <sql id="select">
+        SELECT * FROM cars
+    </sql>
+
+    <select id="getEntityById" resultMap = "CarResultMap">
+        <include refid="select"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getCarsByModel" resultMap = "CarResultMap">
+        <include refid="select"/>
+        WHERE model = #{model}
+    </select>
+
+    <select id="getAll" resultMap = "CarResultMap">
+        <include refid="select"/>
+    </select>
+
+    <update id="updateEntity">
+        UPDATE cars
+        SET price = #{price}, model = #{model}, year = #{year}, is_sold = #{is_sold}, car_type_id #{carType.id}, manufacturer = #{manufacturer.id}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="removeEntityById">
+        DELETE FROM cars
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

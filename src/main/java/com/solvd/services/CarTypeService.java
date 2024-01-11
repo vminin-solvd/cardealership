@@ -1,7 +1,7 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.ICarTypeDAO;
-import com.solvd.jbdc.dao.CarTypeDAO;
+import com.solvd.mybatis.dao.CarTypeDAO;
 import com.solvd.models.CarType;
 
 import java.util.List;

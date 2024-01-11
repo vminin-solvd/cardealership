@@ -5,11 +5,6 @@ public class OrderHasAdditionalService {
     private Order order;
     private AdditionalService additionalService;
 
-    public OrderHasAdditionalService(Order order, AdditionalService additionalService) {
-        this.order = order;
-        this.additionalService = additionalService;
-    }
-
     public Order getOrder() {
         return order;
     }

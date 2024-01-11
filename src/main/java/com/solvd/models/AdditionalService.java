@@ -4,6 +4,7 @@ public class AdditionalService {
 
     private int id;
     private ServiceType serviceType;
+    private String serviceName;
 
     public int getId() {
         return id;
@@ -21,11 +22,20 @@ public class AdditionalService {
         this.serviceType = serviceType;
     }
 
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
     @Override
     public String toString() {
         return "AdditionalService{" +
                 "id=" + id +
                 ", serviceType=" + serviceType +
+                ", serviceName='" + serviceName + '\'' +
                 '}';
     }
 }

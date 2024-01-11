@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAO implements ICarDAO {
-    private static final Logger LOGGER = LogManager.getLogger(CarDAO.class);
+
+    private final Logger LOGGER = LogManager.getLogger(CarDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     @Override

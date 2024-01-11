@@ -1,14 +1,14 @@
 package com.solvd.services;
 
 import com.solvd.interfaces.ICustomerDAO;
-import com.solvd.jbdc.dao.CustomerDAO;
+import com.solvd.mybatis.dao.CustomerDAO;
 import com.solvd.models.Customer;
 
 import java.util.List;
 
 public class CustomerService implements ICustomerDAO {
 
-    CustomerDAO customerDAO = new CustomerDAO();
+    private CustomerDAO customerDAO = new CustomerDAO();
 
     @Override
     public void saveEntity(Customer customer) {
