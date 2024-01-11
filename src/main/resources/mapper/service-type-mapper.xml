@@ -2,15 +2,20 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.jdbc.dao.CarTypeDAO">
+<mapper namespace="com.solvd.mybatis.dao.ServiceTypeDAO">
+
+    <resultMap id="ServiceTypeResultMap" type="com.solvd.models.ServiceType" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="service_type" property="serviceType"/>
+    </resultMap>
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO car_types(id, car_type)
-        VALUES (#{id}, #{carType})
+        INSERT INTO service_types(id, service_type)
+        VALUES (#{id}, #{serviceType})
     </insert>
 
     <sql id="select">
-        SELECT * FROM car_types
+        SELECT * FROM service_types
     </sql>
 
     <select id="getEntityById">
@@ -18,9 +23,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getCarTypeByName">
+    <select id="getServiceTypeByName">
         <include refid="select"/>
-        WHERE car_type = #{carTypeName}
+        WHERE service_type = #{serviceType}
     </select>
 
     <select id="getAll">
@@ -28,19 +33,14 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE car_types
-        SET car_type = #{carType}
+        UPDATE service_types
+        SET service_type = #{serviceType}
         WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM car_types
+        DELETE FROM service_types
         WHERE id = #{id}
     </delete>
-
-    <resultMap id="CarTypeResultMap" type="com.solvd.models.CarType" autoMapping="false">
-        <id column="id" property="id"/>
-        <result column="car_type" property="carType"/>
-    </resultMap>
 
 </mapper>
