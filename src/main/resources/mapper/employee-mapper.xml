@@ -4,6 +4,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.mybatis.dao.EmployeeDAO">
 
+    <resultMap id="EmployeeResultMap" type="com.solvd.models.Employee" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
+        <association property= "position" resultMap="com.solvd.mybatis.dao.EmployeeDAO.EmployeeResultMap"/>
+    </resultMap>
+
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO employees(id, first_name, last_name, position_id)
         VALUES (#{id}, #{firstName}, #{last_name}, #{position.id})
@@ -37,12 +44,5 @@
         DELETE FROM employees
         WHERE id = #{id}
     </delete>
-
-    <resultMap id="EmployeeResultMap" type="com.solvd.models.Employee" autoMapping="false">
-        <id column="id" property="id"/>
-        <result column="first_name" property="firstName"/>
-        <result column="last_name" property="lastName"/>
-        <association property= "position" resultMap="com.solvd.mybatis.dao.EmployeeDAO.EmployeeResultMap"/>
-    </resultMap>
 
 </mapper>

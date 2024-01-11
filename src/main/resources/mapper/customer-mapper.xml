@@ -2,15 +2,21 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.mybatis.dao.ServiceTypeDAO">
+<mapper namespace="com.solvd.mybatis.dao.CustomerDAO">
+
+    <resultMap id="CustomerResultMap" type="com.solvd.models.Customer" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
+    </resultMap>
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO service_types(id, service_type)
-        VALUES (#{id}, #{serviceType})
+        INSERT INTO customers(id, first_name, last_name)
+        VALUES (#{id}, #{firstName}, #{lastName})
     </insert>
 
     <sql id="select">
-        SELECT * FROM service_types
+        SELECT * FROM customers
     </sql>
 
     <select id="getEntityById">
@@ -18,9 +24,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getServiceTypeByName">
+    <select id="getCustomerByFirstName">
         <include refid="select"/>
-        WHERE service_type = #{serviceType}
+        WHERE first_name = #{firstName}
     </select>
 
     <select id="getAll">
@@ -28,19 +34,14 @@
     </select>
 
     <update id="updateEntity">
-        UPDATE service_types
-        SET service_type = #{serviceType}
+        UPDATE customers
+        SET first_name = #{firstName}, last_name = #{lastName}
         WHERE id = #{id}
     </update>
 
     <delete id="removeEntityById">
-        DELETE FROM service_types
+        DELETE FROM customers
         WHERE id = #{id}
     </delete>
-
-    <resultMap id="ServiceTypeResultMap" type="com.solvd.models.ServiceType" autoMapping="false">
-        <id column="id" property="id"/>
-        <result column="service_type" property="serviceType"/>
-    </resultMap>
 
 </mapper>

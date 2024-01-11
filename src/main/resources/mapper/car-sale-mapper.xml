@@ -4,6 +4,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.mybatis.dao.CarSaleDAO">
 
+    <resultMap id="CarSaleResultMap" type="com.solvd.models.CarSale" autoMapping="false">
+        <id column="id" property="id"/>
+        <association property="customer" resultMap="com.solvd.mybatis.dao.CustomerDAO.CustomerResultMap"/>
+        <association property="employee" resultMap="com.solvd.mybatis.dao.EmployeeDAO.EmployeeResultMap"/>
+        <association property="car" resultMap="com.solvd.mybatis.dao.CarDAO.CarResultMap"/>
+    </resultMap>
+
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO car_sales(id, customer_id, employee_id, car_id)
         VALUES (#{id}, #{customer.id}, #{employee.id}, #{car.id})
@@ -37,12 +44,5 @@
         DELETE FROM car_sales
         WHERE id = #{id}
     </delete>
-
-    <resultMap id="CarSaleResultMap" type="com.solvd.models.CarSale" autoMapping="false">
-        <id column="id" property="id"/>
-        <association property="customer" resultMap="com.solvd.mybatis.dao.CustomerDAO.CustomerResultMap"/>
-        <association property="employee" resultMap="com.solvd.mybatis.dao.EmployeeDAO.EmployeeResultMap"/>
-        <association property="car" resultMap="com.solvd.mybatis.dao.CarDAO.CarResultMap"/>
-    </resultMap>
 
 </mapper>
