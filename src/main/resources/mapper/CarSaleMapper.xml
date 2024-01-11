@@ -2,29 +2,29 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.jdbc.dao.CarSaleDAO">
+<mapper namespace="com.solvd.mybatis.dao.CarSaleDAO">
 
     <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO car_sales(id, customer_id, employee_id, car_id)
         VALUES (#{id}, #{customer.id}, #{employee.id}, #{car.id})
     </insert>
 
-    <sql id="select">
+    <sql id="select all">
         SELECT * FROM car_sales
     </sql>
 
-    <select id="getEntityById">
-        <include refid="select"/>
+    <select id="getEntityById" resultMap="CarSaleResultMap">
+        <include refid="select all"/>
         WHERE id = #{id}
     </select>
 
-    <select id="getCarSaleByEmployeeId">
-        <include refid="select"/>
+    <select id="getCarSaleByEmployeeId" resultMap="CarSaleResultMap">
+        <include refid="select all"/>
         WHERE employee_id = #{employee.id}
     </select>
 
-    <select id="getAll">
-        <include refid="select"/>
+    <select id="getAll" resultMap="CarSaleResultMap">
+        <include refid="select all"/>
     </select>
 
     <update id="updateEntity">
@@ -40,9 +40,9 @@
 
     <resultMap id="CarSaleResultMap" type="com.solvd.models.CarSale" autoMapping="false">
         <id column="id" property="id"/>
-        <result column="customer_id" property="FIXME"/>
-        <result column="employee_id" property="FIXME"/>
-        <result column="car_id" property="FIXME"/>
+        <association property="customer" resultMap="com.solvd.mybatis.dao.CustomerDAO.CustomerResultMap"/>
+        <association property="employee" resultMap="com.solvd.mybatis.dao.EmployeeDAO.EmployeeResultMap"/>
+        <association property="car" resultMap="com.solvd.mybatis.dao.CarDAO.CarResultMap"/>
     </resultMap>
 
 </mapper>
