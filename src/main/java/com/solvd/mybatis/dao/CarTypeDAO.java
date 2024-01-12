@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.ICarTypeDAO;
 import com.solvd.models.CarType;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class CarTypeDAO implements ICarTypeDAO{
     private final Logger LOGGER = LogManager.getLogger(CarTypeDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ICarTypeDAO myBatisDAO;
+
+    public CarTypeDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(CarType carType) {
