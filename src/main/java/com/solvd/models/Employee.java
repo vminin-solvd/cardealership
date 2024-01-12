@@ -1,10 +1,21 @@
 package com.solvd.models;
 
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlRootElement(name = "employee")
+@XmlType(propOrder = {"id", "firstName", "lastName", "position"})
 public class Employee {
 
+    @XmlAttribute(name = "id")
     private int id;
+    @XmlElement(name = "firstName")
     private String firstName;
+    @XmlElement(name = "lastName")
     private String lastName;
+    @XmlElement(name = "position")
     private Position position;
 
     public int getId() {

@@ -1,10 +1,21 @@
 package com.solvd.models;
 
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlRootElement(name = "carSale")
+@XmlType(propOrder = {"id", "customer", "employee", "car"})
 public class CarSale {
 
+    @XmlAttribute(name = "id")
     private int id;
+    @XmlElement(name = "customer")
     private Customer customer;
+    @XmlElement(name = "employee")
     private Employee employee;
+    @XmlElement(name = "car")
     private Car car;
 
     public int getId() {
