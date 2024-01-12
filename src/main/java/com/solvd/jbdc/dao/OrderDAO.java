@@ -31,19 +31,15 @@ public class OrderDAO implements IOrderDAO {
             while (rs.next()) {
                 Order order = new Order();
                 order.setId(rs.getInt("id"));
-
                 Employee employee = new Employee();
                 employee.setId(rs.getInt("employee_id"));
                 order.setEmployee(employee);
-
                 Customer customer = new Customer();
                 customer.setId(rs.getInt("customer_id"));
                 order.setCustomer(customer);
-
                 Car car = new Car();
                 car.setId(rs.getInt("car_id"));
                 order.setCar(car);
-
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -93,7 +89,6 @@ public class OrderDAO implements IOrderDAO {
                 if (rs.next()) {
                     order = new Order();
                     order.setId(rs.getInt("id"));
-
                     order.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     order.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     order.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));

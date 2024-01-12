@@ -1,3 +1,6 @@
-<car-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/car-type.xsd" >
-
-</car-type>
+<?xml version="1.0" encoding="UTF-8"?>
+<carType id ="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/car-type.xsd" >
+    <carType>
+        Sedan
+    </carType>
+</carType>

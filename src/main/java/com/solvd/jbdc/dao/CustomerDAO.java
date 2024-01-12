@@ -106,7 +106,7 @@ public class CustomerDAO implements ICustomerDAO {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, customer.getFirstName());
             ps.setString(2, customer.getLastName());
-            ps.setInt(2, customer.getId());
+            ps.setInt(3, customer.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info("Error updating customer entity: ", e);
@@ -146,7 +146,6 @@ public class CustomerDAO implements ICustomerDAO {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT FROM customers WHERE first_name = (?)";
         Customer customer = null;
-
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, firstName);
             ps.execute();

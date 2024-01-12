@@ -29,7 +29,6 @@ public class TestDriveDAO implements ITestDriveDAO {
                 while (rs.next()) {
                     TestDrive testDrive = new TestDrive();
                     testDrive.setId(rs.getInt("id"));
-
                     testDrive.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     testDrive.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     testDrive.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
@@ -85,7 +84,6 @@ public class TestDriveDAO implements ITestDriveDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     testDrive.setId(rs.getInt("id"));
-
                     testDrive.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     testDrive.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     testDrive.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
@@ -161,7 +159,6 @@ public class TestDriveDAO implements ITestDriveDAO {
                 while (rs.next()) {
                     TestDrive testDrive = new TestDrive();
                     testDrive.setId(rs.getInt("id"));
-
                     testDrive.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     testDrive.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     testDrive.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
