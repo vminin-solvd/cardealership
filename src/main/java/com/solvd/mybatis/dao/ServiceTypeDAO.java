@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.IServiceTypeDAO;
 import com.solvd.models.ServiceType;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
     private final Logger LOGGER = LogManager.getLogger(ServiceTypeDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IServiceTypeDAO myBatisDAO;
+
+    public ServiceTypeDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(ServiceType serviceType) {

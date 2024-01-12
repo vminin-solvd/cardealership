@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.IManufacturerDAO;
 import com.solvd.models.Manufacturer;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class ManufacturerDAO implements IManufacturerDAO {
     private final Logger LOGGER = LogManager.getLogger(ManufacturerDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IManufacturerDAO myBatisDAO;
+
+    public ManufacturerDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(Manufacturer manufacturer) {

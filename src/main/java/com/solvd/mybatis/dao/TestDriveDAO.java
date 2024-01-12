@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.ITestDriveDAO;
 import com.solvd.models.TestDrive;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class TestDriveDAO implements ITestDriveDAO {
     private final Logger LOGGER = LogManager.getLogger(TestDriveDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ITestDriveDAO myBatisDAO;
+
+    public TestDriveDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(TestDrive testDrive) {

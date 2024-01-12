@@ -3,6 +3,7 @@ package com.solvd.mybatis.dao;
 import com.solvd.interfaces.IOrderHasAdditionalServicesDAO;
 import com.solvd.models.AdditionalService;
 import com.solvd.models.OrderHasAdditionalService;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,10 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
     private final Logger LOGGER = LogManager.getLogger(OrderHasAdditionalServiceDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IOrderHasAdditionalServicesDAO myBatisDAO;
+
+    public OrderHasAdditionalServiceDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(OrderHasAdditionalService orderHasAdditionalService) {

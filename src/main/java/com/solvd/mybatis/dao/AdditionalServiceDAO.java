@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.IAdditionalServiceDAO;
 import com.solvd.models.AdditionalService;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
     private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IAdditionalServiceDAO myBatisDAO;
+
+    public AdditionalServiceDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public AdditionalService getAdditionalServiceByServiceName(String serviceName) {

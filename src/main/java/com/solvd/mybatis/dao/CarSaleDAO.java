@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.ICarSaleDAO;
 import com.solvd.models.CarSale;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class CarSaleDAO implements ICarSaleDAO{
     private final Logger LOGGER = LogManager.getLogger(AdditionalServiceDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ICarSaleDAO myBatisDAO;
+
+    public CarSaleDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(CarSale carSale) {

@@ -3,6 +3,7 @@ package com.solvd.mybatis.dao;
 import com.solvd.interfaces.IManufacturerDAO;
 import com.solvd.interfaces.IPositionDAO;
 import com.solvd.models.Position;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,10 @@ public class PositionDAO implements IPositionDAO {
     private final Logger LOGGER = LogManager.getLogger(PositionDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IPositionDAO myBatisDAO;
+
+    public PositionDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(Position position) {
