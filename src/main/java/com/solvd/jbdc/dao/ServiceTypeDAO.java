@@ -140,7 +140,6 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT FROM service_types WHERE service_type = (?)";
         ServiceType serviceType = null;
-
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, serviceTypeName);
             ps.execute();

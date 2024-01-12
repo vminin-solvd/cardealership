@@ -17,6 +17,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
 
     private final Logger LOGGER = LogManager.getLogger(ManufacturerDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
+
     @Override
     public void saveEntity(Manufacturer manufacturer) {
         Connection connection = connectionPool.getConnection();
@@ -67,7 +68,6 @@ public class ManufacturerDAO implements IManufacturerDAO {
         return manufacturers;
     }
 
-
     @Override
     public Manufacturer getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
@@ -101,8 +101,8 @@ public class ManufacturerDAO implements IManufacturerDAO {
         Connection connection = connectionPool.getConnection();
         String query = "UPDATE manufacturers SET manufacturer_name = (?) WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(2, manufacturer.getManufacturerName());
-            ps.setInt(1, manufacturer.getId());
+            ps.setString(1, manufacturer.getManufacturerName());
+            ps.setInt(2, manufacturer.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info("Error updating manufacturer entity: ", e);
@@ -142,7 +142,6 @@ public class ManufacturerDAO implements IManufacturerDAO {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT FROM manufacturers WHERE manufacturer_name = (?)";
         Manufacturer manufacturer = null;
-
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, manufacturerName);
             ps.execute();

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="manufacturerName" type="xs:string"/>
+
+    <xs:complexType name="ManufacturerType">
+        <xs:sequence>
+            <xs:element name="manufacturerName" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:int"/>
+    </xs:complexType>
+
+    <xs:element name="manufacturer" type="ManufacturerType"/>
+
 </xs:schema>
