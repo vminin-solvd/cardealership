@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.ICustomerDAO;
 import com.solvd.models.Customer;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class CustomerDAO implements ICustomerDAO{
     private final Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ICustomerDAO myBatisDAO;
+
+    public CustomerDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(Customer customer) {

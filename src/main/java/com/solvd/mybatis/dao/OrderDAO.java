@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.IOrderDAO;
 import com.solvd.models.Order;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class OrderDAO implements IOrderDAO {
     private final Logger LOGGER = LogManager.getLogger(OrderDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static IOrderDAO myBatisDAO;
+
+    public OrderDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(Order order) {

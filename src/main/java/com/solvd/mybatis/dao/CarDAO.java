@@ -2,6 +2,7 @@ package com.solvd.mybatis.dao;
 
 import com.solvd.interfaces.ICarDAO;
 import com.solvd.models.Car;
+import com.solvd.util.MyBatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,10 @@ public class CarDAO implements ICarDAO {
     private final Logger LOGGER = LogManager.getLogger(CarDAO.class);
     private static SqlSessionFactory sqlSessionFactory;
     private static ICarDAO myBatisDAO;
+
+    public CarDAO() {
+        sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
+    }
 
     @Override
     public void saveEntity(Car car) {
