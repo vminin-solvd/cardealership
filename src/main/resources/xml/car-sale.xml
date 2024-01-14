@@ -19,10 +19,10 @@
         <model> LS430 </model>
         <year>  2001  </year>
         <isSold> true </isSold>
-        <carType>
+        <carType id="1">
             <carType> Sedan </carType>
         </carType>
-        <manufacturer>
+        <manufacturer id="1">
             <manufacturerName> Lexus </manufacturerName>
         </manufacturer>
     </car>
