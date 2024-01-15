@@ -17,7 +17,7 @@ public class JAXBParser {
 
     private final static Logger LOGGER = LogManager.getLogger(JAXBParser.class);
 
-    public static void marshall(CarSale carSale){
+    public static void marshal(CarSale carSale){
         try {
             JAXBContext context = JAXBContext.newInstance(CarSale.class, Customer.class, Employee.class, Car.class);
             Marshaller marshaller = context.createMarshaller();
@@ -28,7 +28,7 @@ public class JAXBParser {
         }
     }
 
-    public static CarSale unmarshall() {
+    public static CarSale unmarshal() {
         CarSale carSale;
         try {
             JAXBContext context = JAXBContext.newInstance(CarSale.class, Customer.class, Employee.class, Car.class);

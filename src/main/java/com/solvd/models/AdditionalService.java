@@ -1,5 +1,7 @@
 package com.solvd.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "additionalService")
@@ -8,10 +10,13 @@ import javax.xml.bind.annotation.*;
 public class AdditionalService {
 
     @XmlAttribute(name = "id")
+    @JsonProperty("id")
     private int id;
     @XmlElement(name = "serviceType", type = ServiceType.class)
+    @JsonProperty("serviceType")
     private ServiceType serviceType;
     @XmlElement(name = "serviceName")
+    @JsonProperty("serviceName")
     private String serviceName;
 
     public int getId() {
