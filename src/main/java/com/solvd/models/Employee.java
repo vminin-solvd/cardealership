@@ -1,11 +1,9 @@
 package com.solvd.models;
 
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "employee")
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "firstName", "lastName", "position"})
 public class Employee {
 
@@ -15,7 +13,7 @@ public class Employee {
     private String firstName;
     @XmlElement(name = "lastName")
     private String lastName;
-    @XmlElement(name = "position")
+    @XmlElement(name = "position", type = Position.class)
     private Position position;
 
     public int getId() {

@@ -1,8 +1,15 @@
 package com.solvd.models;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "serviceType")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"id", "serviceType"})
 public class ServiceType {
 
+    @XmlAttribute(name = "id")
     private int id;
+    @XmlElement(name = "serviceType")
     private String serviceType;
 
     public ServiceType() {
