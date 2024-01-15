@@ -1,0 +1,33 @@
+{
+  "id" : 1,
+  "customer" : {
+    "id" : 1,
+    "firstName" : "Victor",
+    "lastName" : "Minin"
+  },
+  "employee" : {
+    "id" : 1,
+    "firstName" : "Pushkin",
+    "lastName" : "Minin",
+    "position" : {
+      "id" : 1,
+      "positionName" : "Sales Associate"
+    }
+  },
+  "car" : {
+    "sold" : true,
+    "id" : 1,
+    "price" : 20000,
+    "model" : "LS430",
+    "year" : "2001",
+    "isSold" : true,
+    "carType" : {
+      "id" : 1,
+      "carType" : "Sedan"
+    },
+    "manufacturer" : {
+      "id" : 1,
+      "manufacturerName" : "Lexus"
+    }
+  }
+}
