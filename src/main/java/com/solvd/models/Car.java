@@ -67,6 +67,7 @@ public class Car {
         return isSold;
     }
 
+    @JsonProperty("isSold")
     public void setSold(boolean sold) {
         isSold = sold;
     }

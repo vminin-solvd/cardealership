@@ -2,7 +2,6 @@ package com.solvd;
 
 import com.solvd.models.*;
 import com.solvd.parser.JacksonParser;
-import com.solvd.parser.jaxb.JAXBParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
