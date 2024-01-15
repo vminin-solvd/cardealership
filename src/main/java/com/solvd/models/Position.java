@@ -1,8 +1,15 @@
 package com.solvd.models;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "position")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"id", "positionName"})
 public class Position {
 
+    @XmlAttribute(name = "id")
     private int id;
+    @XmlElement(name = "positionName")
     private String positionName;
 
     public Position() {}
