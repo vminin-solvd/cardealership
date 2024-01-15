@@ -48,7 +48,7 @@ public class JacksonMain {
         JacksonParser jacksonParser = new JacksonParser();
         jacksonParser.marshal(carSale);
 
-        carSale = (CarSale) jacksonParser.unmarshal(CarSale.class);
+        carSale = jacksonParser.unmarshal(CarSale.class);
         LOGGER.info("CarSale: " + carSale);
     }
 }
