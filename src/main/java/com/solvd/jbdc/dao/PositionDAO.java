@@ -39,7 +39,7 @@ public class PositionDAO implements IPositionDAO {
     }
 
     @Override
-    public List<Position> getAll(){
+    public List<Position> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM positions";
         List<Position> positions = new ArrayList<>();
@@ -56,7 +56,7 @@ public class PositionDAO implements IPositionDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all position entities: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

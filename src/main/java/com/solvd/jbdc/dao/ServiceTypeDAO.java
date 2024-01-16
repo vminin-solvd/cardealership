@@ -39,7 +39,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
     }
 
     @Override
-    public List<ServiceType> getAll(){
+    public List<ServiceType> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM service_types";
         List<ServiceType> serviceTypes = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all service type entities: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -140,7 +140,6 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT FROM service_types WHERE service_type = (?)";
         ServiceType serviceType = null;
-
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, serviceTypeName);
             ps.execute();

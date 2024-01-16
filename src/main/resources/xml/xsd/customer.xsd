@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="customerType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:int"/>
+    </xs:complexType>
+
+    <xs:element name="customer" type="customerType"/>
+
+</xs:schema>

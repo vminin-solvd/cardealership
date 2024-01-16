@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carSale id ="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/car-sale.xsd">
+
+    <customer id="1">
+        <firstName> Victor </firstName>
+        <lastName> Minin </lastName>
+    </customer>
+
+    <employee id="1">
+        <firstName> Pushkin </firstName>
+        <lastName> Minin </lastName>
+        <position id="1">
+            <positionName> Sales Associate </positionName>
+        </position>
+    </employee>
+
+    <car id="1">
+        <price> 20000 </price>
+        <model> LS430 </model>
+        <year>  2001  </year>
+        <isSold> true </isSold>
+        <carType id="1">
+            <carType> Sedan </carType>
+        </carType>
+        <manufacturer id="1">
+            <manufacturerName> Lexus </manufacturerName>
+        </manufacturer>
+    </car>
+
+</carSale>
+
