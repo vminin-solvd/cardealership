@@ -40,7 +40,7 @@ public class CarTypeDAO implements ICarTypeDAO {
     }
 
     @Override
-    public List<CarType> getAll(){
+    public List<CarType> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM car_types";
         List<CarType> carTypes = new ArrayList<>();
@@ -57,7 +57,7 @@ public class CarTypeDAO implements ICarTypeDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all car types", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

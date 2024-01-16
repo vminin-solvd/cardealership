@@ -42,7 +42,7 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Override
-    public List<Employee> getAll(){
+    public List<Employee> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM employees";
         List<Employee> employees = new ArrayList<>();
@@ -63,7 +63,7 @@ public class EmployeeDAO implements IEmployeeDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all employees: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

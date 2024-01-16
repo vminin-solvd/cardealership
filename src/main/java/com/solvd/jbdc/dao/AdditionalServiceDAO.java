@@ -57,7 +57,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all additional services: ", e);
         } finally {
-            if( connection != null) {
+            if  (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
