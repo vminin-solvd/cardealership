@@ -38,7 +38,7 @@ public class CarSaleDAO implements ICarSaleDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all car sales: ", e);
         } finally {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

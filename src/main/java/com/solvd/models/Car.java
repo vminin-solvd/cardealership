@@ -1,13 +1,25 @@
 package com.solvd.models;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "car")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"id", "price", "model", "year", "isSold", "carType", "manufacturer"})
 public class Car {
 
+    @XmlAttribute(name = "id")
     private int id;
+    @XmlElement(name = "price")
     private int price;
+    @XmlElement(name = "model")
     private String model;
+    @XmlElement(name = "year")
     private String year;
+    @XmlElement(name = "isSold")
     private boolean isSold;
+    @XmlElement(name = "carType", type = CarType.class)
     private CarType carType;
+    @XmlElement(name = "manufacturer", type = Manufacturer.class)
     private Manufacturer manufacturer;
 
     public int getId() {

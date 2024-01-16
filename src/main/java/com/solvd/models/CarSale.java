@@ -1,21 +1,19 @@
 package com.solvd.models;
 
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "carSale")
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "customer", "employee", "car"})
 public class CarSale {
 
     @XmlAttribute(name = "id")
     private int id;
-    @XmlElement(name = "customer")
+    @XmlElement(name = "customer", type = Customer.class)
     private Customer customer;
-    @XmlElement(name = "employee")
+    @XmlElement(name = "employee", type = Employee.class)
     private Employee employee;
-    @XmlElement(name = "car")
+    @XmlElement(name = "car", type = Car.class)
     private Car car;
 
     public int getId() {

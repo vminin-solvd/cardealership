@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<carSale id="1">
+    <customer id="1">
+        <firstName>Victor</firstName>
+        <lastName>Minin</lastName>
+    </customer>
+    <employee id="1">
+        <firstName>Pushkin</firstName>
+        <lastName>Minin</lastName>
+        <position id="1">
+            <positionName>Sales Associate</positionName>
+        </position>
+    </employee>
+    <car id="1">
+        <price>20000</price>
+        <model>LS430</model>
+        <year>2001</year>
+        <isSold>true</isSold>
+        <carType id="1">
+            <carType>Sedan</carType>
+        </carType>
+        <manufacturer id="1">
+            <manufacturerName>Lexus</manufacturerName>
+        </manufacturer>
+    </car>
+</carSale>

@@ -1,11 +1,9 @@
 package com.solvd.models;
 
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "carType")
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "carType"})
 public class CarType {
 

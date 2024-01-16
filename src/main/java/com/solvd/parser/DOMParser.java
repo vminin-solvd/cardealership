@@ -59,6 +59,7 @@ public class DOMParser {
                     LOGGER.info("Last Name: " + employeeElement.getElementsByTagName("lastName").item(0).getTextContent());
                     NodeList positionList = employeeElement.getElementsByTagName("position");
                     for (int j = 0; j < positionList.getLength(); j++) {
+
                         Node positionNode = positionList.item(j);
                         if (positionNode.getNodeType() == Node.ELEMENT_NODE) {
                             Element positionElement = (Element)positionNode;
@@ -106,6 +107,7 @@ public class DOMParser {
             throw new RuntimeException(e);
         }
     }
+
     public static boolean validate(String xsdFile, String xmlFile) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);

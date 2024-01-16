@@ -40,7 +40,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
     }
 
     @Override
-    public List<AdditionalService> getAll(){
+    public List<AdditionalService> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM additional_services";
         List<AdditionalService> additionalServiceList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all additional services: ", e);
         } finally {
-            if  (connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -142,7 +142,6 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT FROM additional_services WHERE service_name = (?)";
         AdditionalService additionalService = null;
-
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, serviceName);
             ps.execute();

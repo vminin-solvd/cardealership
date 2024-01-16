@@ -164,11 +164,9 @@ public class EmployeeDAO implements IEmployeeDAO {
                 employee.setId(rs.getInt("id"));
                 employee.setFirstName(rs.getString("first_name"));
                 employee.setLastName(rs.getString("last_name"));
-
                 Position position = new Position();
                 position.setId(rs.getInt("position_id"));
                 employee.setPosition(position);
-
                 employees.add(employee);
             }
         } catch (SQLException e) {
