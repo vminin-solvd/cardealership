@@ -1,6 +1,7 @@
 package com.solvd;
 
 import com.solvd.models.Order;
+import com.solvd.parser.DOMParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.services.OrderService;
@@ -13,10 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        OrderService orderService = new OrderService();
+        DOMParser domParser = new DOMParser();
+        domParser.parse();
 
-        List<Order> orders = orderService.getAll();
-
-        LOGGER.info(orders);
     }
 }

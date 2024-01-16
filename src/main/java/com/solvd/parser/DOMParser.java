@@ -8,9 +8,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,7 +24,14 @@ public class DOMParser {
     private static final Logger LOGGER = LogManager.getLogger(DOMParser.class);
 
     public static void parse(){
-        File file = new File("src/main/resources/car-sale.xml");
+        String xsdFile = "src/main/resources/xml/xsd/car-sale.xsd";
+        String xmlFile = "src/main/resources/xml/car-sale.xml";
+        if(validate(xsdFile, xmlFile)) {
+            LOGGER.info("Validated");
+        } else {
+            LOGGER.info("Not Validated");
+        }
+        File file = new File(xmlFile);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -93,5 +105,18 @@ public class DOMParser {
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static boolean validate(String xsdFile, String xmlFile) {
+        try {
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = factory.newSchema(new File(xsdFile));
+            Validator validator = schema.newValidator();
+            validator.validate(new StreamSource(new File(xmlFile)));
+
+        } catch (IOException | SAXException e) {
+            LOGGER.info(e);
+            return false;
+        }
+        return true;
     }
 }
