@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface IOrderHasAdditionalServicesDAO<OrderHasAdditionalServices, AdditionalServices> extends IBaseDAO<OrderHasAdditionalService> {
     List<AdditionalService> getAllServicesById(int id);
-
 }

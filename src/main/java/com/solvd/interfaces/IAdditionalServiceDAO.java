@@ -4,5 +4,5 @@ import com.solvd.models.AdditionalService;
 
 
 public interface IAdditionalServiceDAO extends IBaseDAO<AdditionalService> {
-AdditionalService getAdditionalServiceByServiceName(String serviceName);
+    AdditionalService getAdditionalServiceByServiceName(String serviceName);
 }

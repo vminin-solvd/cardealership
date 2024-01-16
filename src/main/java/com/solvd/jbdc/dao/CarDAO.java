@@ -33,7 +33,6 @@ public class CarDAO implements ICarDAO {
                     car.setModel(rs.getString("model"));
                     car.setYear(rs.getString("year"));
                     car.setSold(rs.getBoolean("is_sold"));
-
                     car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
                     car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
                     cars.add(car);}
@@ -41,7 +40,7 @@ public class CarDAO implements ICarDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all cars: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -92,7 +91,6 @@ public class CarDAO implements ICarDAO {
                     car.setModel(rs.getString("model"));
                     car.setYear(rs.getString("year"));
                     car.setSold(rs.getBoolean("is_sold"));
-
                     car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
                     car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
                 }
@@ -172,10 +170,8 @@ public class CarDAO implements ICarDAO {
                 car.setModel(rs.getString("model"));
                 car.setYear(rs.getString("year"));
                 car.setSold(rs.getBoolean("is_sold"));
-
                 car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
                 car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
-
                 cars.add(car);
             }
         } catch (SQLException e) {

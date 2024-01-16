@@ -29,7 +29,6 @@ public class CarSaleDAO implements ICarSaleDAO {
                 while (rs.next()) {
                     CarSale carSale = new CarSale();
                     carSale.setId(rs.getInt("id"));
-
                     carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
@@ -39,7 +38,7 @@ public class CarSaleDAO implements ICarSaleDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all car sales: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -84,7 +83,6 @@ public class CarSaleDAO implements ICarSaleDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     carSale.setId(rs.getInt("id"));
-
                     carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
@@ -156,15 +154,13 @@ public class CarSaleDAO implements ICarSaleDAO {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.execute();
-            try (ResultSet rs = ps.getResultSet()){
+            try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     CarSale carSale = new CarSale();
                     carSale.setId(rs.getInt("id"));
-
                     carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
-
                     carSales.add(carSale);
                 }
             }
