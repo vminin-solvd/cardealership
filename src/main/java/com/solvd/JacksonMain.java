@@ -1,7 +1,7 @@
 package com.solvd;
 
 import com.solvd.models.*;
-import com.solvd.parser.JacksonParser;
+import com.solvd.parser.jackson.JacksonUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,6 +12,7 @@ public class JacksonMain {
     private final static Logger LOGGER = LogManager.getLogger(JacksonMain.class);
 
     public static void main(String[] args) throws ParseException {
+        String path = System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.json";
         CarSale carSale = new CarSale();
         carSale.setId(1);
         Customer customer = new Customer();
@@ -44,10 +45,9 @@ public class JacksonMain {
         car.setYear("2001");
         carSale.setCar(car);
 
-        JacksonParser jacksonParser = new JacksonParser();
-        jacksonParser.marshal(carSale);
-
-        carSale = jacksonParser.unmarshal(CarSale.class);
+        JacksonUtil jacksonParser = new JacksonUtil();
+        jacksonParser.marshal(carSale, path);
+        carSale = jacksonParser.unmarshal(CarSale.class, path);
         LOGGER.info("CarSale: " + carSale);
     }
 }
