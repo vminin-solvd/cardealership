@@ -44,7 +44,7 @@ public class JAXBMain {
         car.setSold(true);
         car.setYear("2001");
         carSale.setCar(car);
-
+        
         JAXBUtil.marshal(carSale, path);
 
         carSale = (CarSale) JAXBUtil.unmarshal(CarSale.class, path);
