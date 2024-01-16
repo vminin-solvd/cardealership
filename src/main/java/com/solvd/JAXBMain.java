@@ -1,7 +1,7 @@
 package com.solvd;
 
 import com.solvd.models.*;
-import com.solvd.parser.jaxb.JAXBParser;
+import com.solvd.parser.jaxb.JAXBUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,6 +12,7 @@ public class JAXBMain {
     private final static Logger LOGGER = LogManager.getLogger(JAXBMain.class);
 
     public static void main(String[] args) throws ParseException {
+        String path = System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.xml";
         CarSale carSale = new CarSale();
         carSale.setId(1);
         Customer customer = new Customer();
@@ -44,10 +45,9 @@ public class JAXBMain {
         car.setYear("2001");
         carSale.setCar(car);
 
-        JAXBParser jaxbParser = new JAXBParser();
-        jaxbParser.marshall(carSale);
+        JAXBUtil.marshal(carSale, path);
 
-        carSale = jaxbParser.unmarshall();
+        carSale = (CarSale) JAXBUtil.unmarshal(CarSale.class, path);
         LOGGER.info("CarSale: " + carSale);
     }
 }
