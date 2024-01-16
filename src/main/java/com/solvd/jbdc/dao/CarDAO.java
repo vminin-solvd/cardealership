@@ -33,7 +33,6 @@ public class CarDAO implements ICarDAO {
                     car.setModel(rs.getString("model"));
                     car.setYear(rs.getString("year"));
                     car.setSold(rs.getBoolean("is_sold"));
-
                     car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
                     car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
                     cars.add(car);}

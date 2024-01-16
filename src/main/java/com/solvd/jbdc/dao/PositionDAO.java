@@ -56,7 +56,7 @@ public class PositionDAO implements IPositionDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all position entities: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class CustomerDAO implements ICustomerDAO{
+public class CustomerDAO implements ICustomerDAO {
 
     private final Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
     private static SqlSessionFactory sqlSessionFactory;

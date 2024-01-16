@@ -31,7 +31,8 @@ public class DOMParser {
         } else {
             LOGGER.info("Not Validated");
         }
-        File file = new File(xmlFile);DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        File file = new File(xmlFile);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(file);
@@ -58,8 +59,9 @@ public class DOMParser {
                     LOGGER.info("Last Name: " + employeeElement.getElementsByTagName("lastName").item(0).getTextContent());
                     NodeList positionList = employeeElement.getElementsByTagName("position");
                     for (int j = 0; j < positionList.getLength(); j++) {
-                        Node positionNode = positionList.item(i);
-                        if(positionNode.getNodeType() == Node.ELEMENT_NODE){
+
+                        Node positionNode = positionList.item(j);
+                        if (positionNode.getNodeType() == Node.ELEMENT_NODE) {
                             Element positionElement = (Element)positionNode;
                             LOGGER.info("Position ID: " + positionElement.getAttribute("id"));
                             LOGGER.info("Position Name: " + positionElement.getElementsByTagName("positionName").item(0).getTextContent());
@@ -69,9 +71,9 @@ public class DOMParser {
             }
 
             NodeList carList = document.getElementsByTagName("car");
-            for(int i = 0; i < carList.getLength(); i++) {
+            for (int i = 0; i < carList.getLength(); i++) {
                 Node carNode = carList.item(i);
-                if(carNode.getNodeType() == Node.ELEMENT_NODE){
+                if (carNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element carElement = (Element) carNode;
                     LOGGER.info("Car ID: " + carElement.getAttribute("id"));
                     LOGGER.info("Price: " + carElement.getElementsByTagName("price").item(0).getTextContent());
@@ -82,8 +84,8 @@ public class DOMParser {
 
                     NodeList carTypeList = carElement.getElementsByTagName("carType");
                     for (int j = 0; j < carTypeList.getLength(); j++) {
-                        Node carTypeNode = carTypeList.item(i);
-                        if(carTypeNode.getNodeType() == Node.ELEMENT_NODE){
+                        Node carTypeNode = carTypeList.item(j);
+                        if (carTypeNode.getNodeType() == Node.ELEMENT_NODE) {
                             Element carTypeElement = (Element) carTypeNode;
                             LOGGER.info("Car Type ID: " + carTypeElement.getAttribute("id"));
                             LOGGER.info("Car Type Name: " + carTypeElement.getElementsByTagName("carType").item(0).getTextContent());
@@ -92,11 +94,11 @@ public class DOMParser {
 
                     NodeList manufacturerList = carElement.getElementsByTagName("manufacturer");
                     for (int j = 0; j < manufacturerList.getLength(); j++) {
-                        Node manufacturerNode = manufacturerList.item(i);
-                        if(manufacturerNode.getNodeType() == Node.ELEMENT_NODE){
+                        Node manufacturerNode = manufacturerList.item(j);
+                        if (manufacturerNode.getNodeType() == Node.ELEMENT_NODE) {
                             Element manufacturerElement = (Element) manufacturerNode;
                             LOGGER.info("Manufacturer ID: " + manufacturerElement.getAttribute("id"));
-                            LOGGER.info("Manufacturer Name: " + manufacturerElement.getElementsByTagName("manufacturerName").item(0).getTextContent());;
+                            LOGGER.info("Manufacturer Name: " + manufacturerElement.getElementsByTagName("manufacturerName").item(0).getTextContent());
                         }
                     }
                 }
