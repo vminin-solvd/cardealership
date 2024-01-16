@@ -40,7 +40,7 @@ public class CustomerDAO implements ICustomerDAO {
     }
 
     @Override
-    public List<Customer> getAll(){
+    public List<Customer> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM customers";
         List<Customer> customers = new ArrayList<>();
@@ -58,7 +58,7 @@ public class CustomerDAO implements ICustomerDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all customer entities: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

@@ -13,7 +13,7 @@ private static Vector<Connection> freeConnections = new Vector<>();
 private static Vector<Connection> usedConnections = new Vector<>();
 
 public static synchronized ConnectionPool getInstance() {
-    if(instance == null) {
+    if (instance == null) {
         instance = new ConnectionPool();
         create();
     }
@@ -21,7 +21,7 @@ public static synchronized ConnectionPool getInstance() {
 }
 
 public static void create() {
-    for(int numConnections = 0; numConnections < INITIAL_POOL_SIZE; numConnections++) {
+    for (int numConnections = 0; numConnections < INITIAL_POOL_SIZE; numConnections++) {
         freeConnections.add(createConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD));
     }
 }
@@ -33,7 +33,7 @@ public synchronized Connection getConnection() {
 }
 
 public synchronized void releaseConnection(Connection connection) throws SQLException {
-    if(usedConnections.remove(connection)) {
+    if (usedConnections.remove(connection)) {
         freeConnections.add(connection);
     } else {
         throw new SQLException("Connection has already returned");

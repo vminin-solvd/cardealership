@@ -16,7 +16,7 @@ public class JAXBUtil<T> {
 
     private final static Logger LOGGER = LogManager.getLogger(JAXBUtil.class);
 
-    public static <T> void marshal(T object, String path){
+    public static <T> void marshal(T object, String path) {
         try {
             JAXBContext context = JAXBContext.newInstance(CarSale.class, Customer.class, Employee.class, Car.class);
             Marshaller marshaller = context.createMarshaller();

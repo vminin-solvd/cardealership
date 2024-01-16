@@ -40,7 +40,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
     }
 
     @Override
-    public List<Manufacturer> getAll(){
+    public List<Manufacturer> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM manufacturers";
         List<Manufacturer> manufacturers = new ArrayList<>();
@@ -57,7 +57,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
         } catch (SQLException e) {
             LOGGER.info("Error: getting all manufacturer entities: ",e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

@@ -39,7 +39,7 @@ public class PositionDAO implements IPositionDAO {
     }
 
     @Override
-    public List<Position> getAll(){
+    public List<Position> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM positions";
         List<Position> positions = new ArrayList<>();
