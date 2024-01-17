@@ -58,6 +58,10 @@ public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServices
                     orderHasAdditionalService = new OrderHasAdditionalService();
                     orderHasAdditionalService.setOrder(order);
                     orderHasAdditionalService.setAdditionalService(additionalService);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4090ae0d12fe9235a22700eb0bbffb25fe8ebc37
                 }
             }
         } catch (SQLException e) {

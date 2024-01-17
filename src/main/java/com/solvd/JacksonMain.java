@@ -16,7 +16,6 @@ public class JacksonMain {
         String path = System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.json";
         CarSaleFactoryClient carSaleFactoryClient = new CarSaleFactoryClient();
         CarSale carSale = carSaleFactoryClient.createCarSale();
-
         JacksonParser jacksonParser = new JacksonParser();
         jacksonParser.marshal(carSale, path);
         carSale = jacksonParser.unmarshal(CarSale.class, path);

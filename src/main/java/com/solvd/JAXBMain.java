@@ -50,7 +50,6 @@ public class JAXBMain {
                 .setEmployee(employee)
                 .setCar(car)
                 .build();
-
         JAXBParser jaxbParser = new JAXBParser();
         jaxbParser.marshal(carSale);
 

@@ -1,6 +1,7 @@
 package com.solvd.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "carSale")
