@@ -40,7 +40,7 @@ public class CarDAO implements ICarDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all cars: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {

@@ -1,4 +1,4 @@
-package com.solvd.parser;
+package com.solvd.parser.jackson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -9,9 +9,9 @@ import java.io.IOException;
 
 import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
 
-public class JacksonParser {
+public class JacksonUtil {
 
-    private static final Logger LOGGER = LogManager.getLogger(JacksonParser.class);
+    private static final Logger LOGGER = LogManager.getLogger(JacksonUtil.class);
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     static {

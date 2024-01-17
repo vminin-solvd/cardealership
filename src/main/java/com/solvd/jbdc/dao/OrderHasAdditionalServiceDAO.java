@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServicesDAO<OrderHasAdditionalService, AdditionalService> {
+public class  OrderHasAdditionalServiceDAO implements IOrderHasAdditionalServicesDAO<OrderHasAdditionalService, AdditionalService> {
 
     private final Logger LOGGER = LogManager.getLogger(OrderHasAdditionalServiceDAO.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();

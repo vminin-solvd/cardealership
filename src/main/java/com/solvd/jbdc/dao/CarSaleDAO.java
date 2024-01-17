@@ -83,7 +83,6 @@ public class CarSaleDAO implements ICarSaleDAO {
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     carSale.setId(rs.getInt("id"));
-
                     carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
@@ -159,11 +158,9 @@ public class CarSaleDAO implements ICarSaleDAO {
                 while (rs.next()) {
                     CarSale carSale = new CarSale();
                     carSale.setId(rs.getInt("id"));
-
                     carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
                     carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
                     carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
-
                     carSales.add(carSale);
                 }
             }

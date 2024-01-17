@@ -13,29 +13,27 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 
-public class JAXBParser {
+public class JAXBUtil<T> {
 
-    private final static Logger LOGGER = LogManager.getLogger(JAXBParser.class);
+    private final static Logger LOGGER = LogManager.getLogger(JAXBUtil.class);
 
-    public static void marshal(CarSale carSale){
+    public static <T> void marshal(T object, String path) {
         try {
             JAXBContext context = JAXBContext.newInstance(CarSale.class, Customer.class, Employee.class, Car.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.marshal(carSale, new File(System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.xml"));
+            marshaller.marshal(object, new File(path));
         } catch(JAXBException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static CarSale unmarshal() {
-        CarSale carSale;
+    public static <T> T unmarshal(Class<T> type, String path) {
         try {
-            JAXBContext context = JAXBContext.newInstance(CarSale.class, Customer.class, Employee.class, Car.class);
-            carSale = (CarSale) context.createUnmarshaller().unmarshal(new File(System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.xml"));
+            JAXBContext context = JAXBContext.newInstance(type);
+            return (T) context.createUnmarshaller().unmarshal(new File(path));
         } catch (JAXBException e) {
             throw new RuntimeException(e);
         }
-        return carSale;
     }
 }

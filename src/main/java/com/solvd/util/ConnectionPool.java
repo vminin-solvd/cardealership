@@ -1,12 +1,16 @@
 package com.solvd.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Vector;
 
 public class ConnectionPool {
-
+  
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static ConnectionPool instance = null;
     private static final int INITIAL_POOL_SIZE = 5;
     private static Vector<Connection> freeConnections = new Vector<>();
@@ -21,10 +25,10 @@ public class ConnectionPool {
 }
 
     public static void create() {
-        for(int numConnections = 0; numConnections < INITIAL_POOL_SIZE; numConnections++) {
+        for (int numConnections = 0; numConnections < INITIAL_POOL_SIZE; numConnections++) {
             freeConnections.add(createConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD));
+        }
     }
-}
 
     public synchronized Connection getConnection() {
         Connection connection = freeConnections.remove(freeConnections.size()-1);
@@ -33,7 +37,7 @@ public class ConnectionPool {
 }
 
     public synchronized void releaseConnection(Connection connection) throws SQLException {
-        if(usedConnections.remove(connection)) {
+        if (usedConnections.remove(connection)) {
             freeConnections.add(connection);
         } else {
             throw new SQLException("Connection has already returned");
@@ -44,7 +48,7 @@ public class ConnectionPool {
         try {
             return  DriverManager.getConnection(url, userName, password);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            LOGGER.info(e.getMessage());
     }
         return null;
     }

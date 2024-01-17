@@ -40,7 +40,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
     }
 
     @Override
-    public List<AdditionalService> getAll(){
+    public List<AdditionalService> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM additional_services";
         List<AdditionalService> additionalServiceList = new ArrayList<>();

@@ -40,7 +40,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
     }
 
     @Override
-    public List<Manufacturer> getAll(){
+    public List<Manufacturer> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM manufacturers";
         List<Manufacturer> manufacturers = new ArrayList<>();

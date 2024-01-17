@@ -40,6 +40,27 @@ public class Car {
         this.manufacturer = builder.manufacturer;
     }
 
+    public CarType getCarType() {
+        return carType;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", price=" + price +
+                ", model='" + model + '\'' +
+                ", year='" + year + '\'' +
+                ", isSold=" + isSold +
+                ", carType=" + carType +
+                ", manufacturer=" + manufacturer +
+                '}';
+    }
+
     public static class Builder {
         private int id;
         private int price;

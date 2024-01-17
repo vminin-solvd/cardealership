@@ -42,7 +42,7 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Override
-    public List<Employee> getAll(){
+    public List<Employee> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM employees";
         List<Employee> employees = new ArrayList<>();

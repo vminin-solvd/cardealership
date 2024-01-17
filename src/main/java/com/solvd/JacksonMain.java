@@ -1,7 +1,7 @@
 package com.solvd;
 
 import com.solvd.models.*;
-import com.solvd.parser.JacksonParser;
+import com.solvd.parser.jackson.JacksonUtil;
 import com.solvd.factory.CarSaleFactoryClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +16,7 @@ public class JacksonMain {
         String path = System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.json";
         CarSaleFactoryClient carSaleFactoryClient = new CarSaleFactoryClient();
         CarSale carSale = carSaleFactoryClient.createCarSale();
-        JacksonParser jacksonParser = new JacksonParser();
+        JacksonUtil jacksonParser = new JacksonUtil();
         jacksonParser.marshal(carSale, path);
         carSale = jacksonParser.unmarshal(CarSale.class, path);
         LOGGER.info("CarSale: " + carSale);
