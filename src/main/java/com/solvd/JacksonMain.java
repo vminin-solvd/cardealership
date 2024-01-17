@@ -1,18 +1,18 @@
 package com.solvd;
 
 import com.solvd.models.*;
-import com.solvd.parser.jaxb.JAXBUtil;
+import com.solvd.parser.jackson.JacksonUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
 
-public class JAXBMain {
+public class JacksonMain {
 
-    private final static Logger LOGGER = LogManager.getLogger(JAXBMain.class);
+    private final static Logger LOGGER = LogManager.getLogger(JacksonMain.class);
 
     public static void main(String[] args) throws ParseException {
-        String path = System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.xml";
+        String path = System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.json";
         CarSale carSale = new CarSale();
         carSale.setId(1);
         Customer customer = new Customer();
@@ -45,9 +45,9 @@ public class JAXBMain {
         car.setYear("2001");
         carSale.setCar(car);
 
-        JAXBUtil.marshal(carSale, path);
-
-        carSale = (CarSale) JAXBUtil.unmarshal(CarSale.class, path);
+        JacksonUtil jacksonParser = new JacksonUtil();
+        jacksonParser.marshal(carSale, path);
+        carSale = jacksonParser.unmarshal(CarSale.class, path);
         LOGGER.info("CarSale: " + carSale);
     }
 }

@@ -1,5 +1,6 @@
 package com.solvd.parser.jaxb;
 
+import com.solvd.JAXBMain;
 import com.solvd.models.Car;
 import com.solvd.models.CarSale;
 import com.solvd.models.Customer;

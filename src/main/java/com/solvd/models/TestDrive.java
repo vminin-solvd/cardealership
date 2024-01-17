@@ -1,5 +1,6 @@
 package com.solvd.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.solvd.parser.jaxb.DateAdapter;
 
 import javax.xml.bind.annotation.*;
@@ -12,15 +13,20 @@ import java.sql.Date;
 public class TestDrive {
 
     @XmlAttribute(name = "id")
+    @JsonProperty("id")
     private int id;
     @XmlJavaTypeAdapter(DateAdapter.class)
     @XmlElement(name = "date")
+    @JsonProperty("date")
     private Date date;
     @XmlElement(name = "car", type = Car.class)
+    @JsonProperty("car")
     private Car car;
     @XmlElement(name = "customer", type = Customer.class)
+    @JsonProperty("customer")
     private Customer customer;
     @XmlElement(name = "employee", type = Employee.class)
+    @JsonProperty("employee")
     private Employee employee;
 
     public int getId() {
