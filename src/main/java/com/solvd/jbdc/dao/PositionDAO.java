@@ -39,12 +39,12 @@ public class PositionDAO implements IPositionDAO {
     }
 
     @Override
-    public List<Position> getAll(){
+    public List<Position> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM positions";
         List<Position> positions = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     Position position = new Position();
@@ -56,7 +56,7 @@ public class PositionDAO implements IPositionDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all position entities: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class PositionDAO implements IPositionDAO {
         Position position = new Position();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     position.setId(rs.getInt("id"));
@@ -123,7 +123,7 @@ public class PositionDAO implements IPositionDAO {
         String query = "DELETE FROM positions WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
         } catch (SQLException e) {
             LOGGER.info("Error removing position entity by ID: ", e);
         } finally {
@@ -144,7 +144,7 @@ public class PositionDAO implements IPositionDAO {
         Position position = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, positionName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     position = new Position();

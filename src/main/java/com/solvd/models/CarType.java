@@ -1,7 +1,6 @@
 package com.solvd.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "carType")
@@ -11,25 +10,22 @@ public class CarType {
 
     @XmlAttribute(name = "id")
     @JsonProperty("id")
-    private int id;
+    private final int id;
     @XmlElement(name = "carType")
     @JsonProperty("carType")
-    private String carType;
+    private final String carType;
+
+    private CarType(Builder builder) {
+        this.id = builder.id;
+        this.carType = builder.carType;
+    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getCarType() {
         return carType;
-    }
-
-    public void setCarType(String carType) {
-        this.carType = carType;
     }
 
     @Override
@@ -38,5 +34,24 @@ public class CarType {
                 "id=" + id +
                 ", carType='" + carType + '\'' +
                 '}';
+    }
+
+    public static class Builder {
+        private int id;
+        private String carType;
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setCarType(String carType) {
+            this.carType = carType;
+            return this;
+        }
+
+        public CarType build() {
+            return new CarType(this);
+        }
     }
 }

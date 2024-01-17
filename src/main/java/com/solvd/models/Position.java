@@ -1,7 +1,6 @@
 package com.solvd.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "position")
@@ -11,27 +10,22 @@ public class Position {
 
     @XmlAttribute(name = "id")
     @JsonProperty("id")
-    private int id;
+    private final int id;
     @XmlElement(name = "positionName")
     @JsonProperty("positionName")
-    private String positionName;
+    private final String positionName;
 
-    public Position() {}
+    private Position(Builder builder) {
+        this.id = builder.id;
+        this.positionName = builder.positionName;
+    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getPositionName() {
         return positionName;
-    }
-
-    public void setPositionName(String positionName) {
-        this.positionName = positionName;
     }
 
     @Override
@@ -40,5 +34,24 @@ public class Position {
                 "id=" + id +
                 ", positionName='" + positionName + '\'' +
                 '}';
+    }
+
+    public static class Builder {
+        private int id;
+        private String positionName;
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setPositionName(String positionName) {
+            this.positionName = positionName;
+            return this;
+        }
+
+        public Position build() {
+            return new Position(this);
+        }
     }
 }

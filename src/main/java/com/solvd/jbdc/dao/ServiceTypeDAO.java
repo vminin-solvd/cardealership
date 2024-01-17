@@ -24,7 +24,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, serviceType.getId());
             ps.setString(2, serviceType.getServiceType());
-
+            ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info("Error saving service type entity: ", e);
         } finally {
@@ -39,12 +39,12 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
     }
 
     @Override
-    public List<ServiceType> getAll(){
+    public List<ServiceType> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM service_types";
         List<ServiceType> serviceTypes = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     ServiceType serviceType = new ServiceType();
@@ -56,7 +56,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all service type entities: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         ServiceType serviceType = new ServiceType();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     serviceType.setId(rs.getInt("id"));
@@ -102,6 +102,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, serviceType.getServiceType());
             ps.setInt(2, serviceType.getId());
+            ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info("Error updating service type entity: ", e);
         } finally {
@@ -121,7 +122,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         String query = "DELETE FROM service_types WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
         } catch (SQLException e) {
             LOGGER.info("Error removing service type entity by ID: ", e);
         } finally {
@@ -142,7 +143,7 @@ public class ServiceTypeDAO implements IServiceTypeDAO {
         ServiceType serviceType = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, serviceTypeName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     serviceType.setId(rs.getInt("id"));

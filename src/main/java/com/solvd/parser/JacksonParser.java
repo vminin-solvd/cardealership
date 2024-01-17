@@ -13,13 +13,12 @@ public class JacksonParser {
 
     private static final Logger LOGGER = LogManager.getLogger(JacksonParser.class);
     private static ObjectMapper objectMapper = new ObjectMapper();
-    private final String path = System.getProperty("user.dir") + "/src/main/resources/carSaleOutput.json";
 
     static {
         objectMapper.enable(INDENT_OUTPUT);
     }
 
-    public <T> void marshal(T object) {
+    public <T> void marshal(T object, String path) {
         try {
             File file = new File(path);
             objectMapper.writeValue(file, object);
@@ -28,7 +27,7 @@ public class JacksonParser {
         }
     }
 
-    public <T> T unmarshal(Class<T> type) {
+    public <T> T unmarshal(Class<T> type, String path) {
         try {
             File file = new File(path);
             return (T) objectMapper.readValue(file, type);

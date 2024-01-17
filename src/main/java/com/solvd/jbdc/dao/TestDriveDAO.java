@@ -24,7 +24,7 @@ public class TestDriveDAO implements ITestDriveDAO {
         String query = "SELECT * FROM test_drives";
         List<TestDrive> testDrives = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     TestDrive testDrive = new TestDrive();
@@ -80,7 +80,7 @@ public class TestDriveDAO implements ITestDriveDAO {
         TestDrive testDrive = new TestDrive();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     testDrive.setId(rs.getInt("id"));
@@ -154,7 +154,7 @@ public class TestDriveDAO implements ITestDriveDAO {
         String query = "SELECT * FROM test_drives WHERE employee_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     TestDrive testDrive = new TestDrive();

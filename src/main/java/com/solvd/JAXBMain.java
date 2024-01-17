@@ -12,37 +12,44 @@ public class JAXBMain {
     private final static Logger LOGGER = LogManager.getLogger(JAXBMain.class);
 
     public static void main(String[] args) throws ParseException {
-        CarSale carSale = new CarSale();
-        carSale.setId(1);
-        Customer customer = new Customer();
-        customer.setId(1);
-        customer.setFirstName("Victor");
-        customer.setLastName("Minin");
-        carSale.setCustomer(customer);
-        Employee employee = new Employee();
-        employee.setId(1);
-        employee.setFirstName("Pushkin");
-        employee.setLastName("Minin");
-        Position position = new Position();
-        position.setId(1);
-        position.setPositionName("Sales Associate");
-        employee.setPosition(position);
-        carSale.setEmployee(employee);
-        Car car = new Car();
-        car.setId(1);
-        CarType carType = new CarType();
-        carType.setId(1);
-        carType.setCarType("Sedan");
-        car.setCarType(carType);
-        car.setPrice(20000);
-        car.setModel("LS430");
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setId(1);
-        manufacturer.setManufacturerName("Lexus");
-        car.setManufacturer(manufacturer);
-        car.setSold(true);
-        car.setYear("2001");
-        carSale.setCar(car);
+        Position position = new Position.Builder()
+                .setId(1)
+                .setPositionName("Sales Associate")
+                .build();
+        Employee employee = new Employee.Builder()
+                .setId(1)
+                .setFirstName("Pushkin")
+                .setLastName("Minin")
+                .setPosition(position)
+                .build();
+        CarType carType = new CarType.Builder()
+                .setId(1)
+                .setCarType("Sedan")
+                .build();
+        Manufacturer manufacturer = new Manufacturer.Builder()
+                .setId(1)
+                .setManufacturerName("Lexus")
+                .build();
+        Car car = new Car.Builder()
+                .setId(1)
+                .setIsSold(true)
+                .setCarType(carType)
+                .setYear("2001")
+                .setPrice(20000)
+                .setModel("LS430")
+                .setManufacturer(manufacturer)
+                .build();
+        Customer customer = new Customer.Builder()
+                .setId(1)
+                .setFirstName("Victor")
+                .setLastName("Minin")
+                .build();
+        CarSale carSale = new CarSale.Builder()
+                .setId(1)
+                .setCustomer(customer)
+                .setEmployee(employee)
+                .setCar(car)
+                .build();
 
         JAXBParser jaxbParser = new JAXBParser();
         jaxbParser.marshal(carSale);

@@ -40,12 +40,12 @@ public class CarTypeDAO implements ICarTypeDAO {
     }
 
     @Override
-    public List<CarType> getAll(){
+    public List<CarType> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM car_types";
         List<CarType> carTypes = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     CarType carType = new CarType();
@@ -57,7 +57,7 @@ public class CarTypeDAO implements ICarTypeDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all car types", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -76,7 +76,7 @@ public class CarTypeDAO implements ICarTypeDAO {
         CarType carType = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     carType.setId(rs.getInt("id"));
@@ -145,7 +145,7 @@ public class CarTypeDAO implements ICarTypeDAO {
         CarType carType = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, carTypeName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     carType = new CarType();

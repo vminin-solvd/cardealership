@@ -40,12 +40,12 @@ public class CustomerDAO implements ICustomerDAO {
     }
 
     @Override
-    public List<Customer> getAll(){
+    public List<Customer> getAll() {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM customers";
         List<Customer> customers = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     Customer customer = new Customer();
@@ -58,7 +58,7 @@ public class CustomerDAO implements ICustomerDAO {
         } catch (SQLException e) {
             LOGGER.info("Error getting all customer entities: ", e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -77,7 +77,7 @@ public class CustomerDAO implements ICustomerDAO {
         Customer customer = new Customer();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     customer.setId(rs.getInt("id"));
@@ -127,7 +127,7 @@ public class CustomerDAO implements ICustomerDAO {
         String query = "DELETE FROM customers WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
         } catch (SQLException e) {
             LOGGER.info("Error removing customer entity by ID: ", e);
         } finally {
@@ -148,7 +148,7 @@ public class CustomerDAO implements ICustomerDAO {
         Customer customer = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, firstName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     customer = new Customer();

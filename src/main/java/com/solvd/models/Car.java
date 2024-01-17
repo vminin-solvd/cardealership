@@ -1,7 +1,6 @@
 package com.solvd.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "car")
@@ -11,93 +10,82 @@ public class Car {
 
     @XmlAttribute(name = "id")
     @JsonProperty("id")
-    private int id;
+    private final int id;
     @XmlElement(name = "price")
     @JsonProperty("price")
-    private int price;
+    private final int price;
     @XmlElement(name = "model")
     @JsonProperty("model")
-    private String model;
+    private final String model;
     @XmlElement(name = "year")
     @JsonProperty("year")
-    private String year;
+    private final String year;
     @XmlElement(name = "isSold")
     @JsonProperty("isSold")
-    private boolean isSold;
+    private final boolean isSold;
     @XmlElement(name = "carType", type = CarType.class)
     @JsonProperty("carType")
-    private CarType carType;
+    private final CarType carType;
     @XmlElement(name = "manufacturer", type = Manufacturer.class)
     @JsonProperty("manufacturer")
-    private Manufacturer manufacturer;
+    private final Manufacturer manufacturer;
 
-    public int getId() {
-        return id;
+    private Car(Builder builder) {
+        this.id = builder.id;
+        this.price = builder.price;
+        this.model = builder.model;
+        this.year = builder.year;
+        this.isSold = builder.isSold;
+        this.carType = builder.carType;
+        this.manufacturer = builder.manufacturer;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public static class Builder {
+        private int id;
+        private int price;
+        private String model;
+        private String year;
+        private boolean isSold;
+        private CarType carType;
+        private Manufacturer manufacturer;
 
-    public int getPrice() {
-        return price;
-    }
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+        public Builder setPrice(int price) {
+            this.price = price;
+            return this;
+        }
 
-    public String getModel() {
-        return model;
-    }
+        public Builder setModel(String model) {
+            this.model = model;
+            return this;
+        }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+        public Builder setYear(String year) {
+            this.year = year;
+            return this;
+        }
 
-    public String getYear() {
-        return year;
-    }
+        public Builder setIsSold(boolean isSold) {
+            this.isSold = isSold;
+            return this;
+        }
 
-    public void setYear(String year) {
-        this.year = year;
-    }
+        public Builder setCarType(CarType carType) {
+            this.carType = carType;
+            return this;
+        }
 
-    public boolean isSold() {
-        return isSold;
-    }
+        public Builder setManufacturer(Manufacturer manufacturer) {
+            this.manufacturer = manufacturer;
+            return this;
+        }
 
-    @JsonProperty("isSold")
-    public void setSold(boolean sold) {
-        isSold = sold;
-    }
-
-    public CarType getCarType() {
-        return carType;
-    }
-
-    public void setCarType(CarType carType) {
-        this.carType = carType;
-    }
-
-    public Manufacturer getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", price=" + price +
-                ", model='" + model + '\'' +
-                ", year='" + year + '\'' +
-                ", isSold=" + isSold +
-                ", carType=" + carType +
-                ", manufacturer=" + manufacturer +
-                '}';
+        public Car build() {
+            return new Car(this);
+        }
     }
 }

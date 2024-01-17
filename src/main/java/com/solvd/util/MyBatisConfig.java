@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class MyBatisConfig {
+
     private static final Logger LOGGER = LogManager.getLogger(MyBatisConfig.class);
     private static SqlSessionFactory sqlSessionFactory;
 
-    static{
-        try(Reader reader = Resources.getResourceAsReader("mybatis-config.xml")){
+    static {
+        try (Reader reader = Resources.getResourceAsReader("mybatis-config.xml")) {
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         } catch (IOException e) {
             LOGGER.info(e);

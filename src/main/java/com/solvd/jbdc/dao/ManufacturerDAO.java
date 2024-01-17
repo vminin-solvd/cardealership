@@ -45,7 +45,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
         String query = "SELECT * FROM manufacturers";
         List<Manufacturer> manufacturers = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     Manufacturer manufacturer = new Manufacturer();
@@ -57,7 +57,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
         } catch (SQLException e) {
             LOGGER.info("Error: getting all manufacturer entities: ",e);
         } finally {
-            if( connection != null) {
+            if (connection != null) {
                 try {
                     connectionPool.releaseConnection(connection);
                 } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
         Manufacturer Manufacturer = new Manufacturer();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     Manufacturer.setId(rs.getInt("id"));
@@ -123,7 +123,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
         String query = "DELETE FROM manufacturers WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
         } catch (SQLException e) {
             LOGGER.info("Error removing manufacturer entity by ID: ",e);
         } finally {
@@ -144,7 +144,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
         Manufacturer manufacturer = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, manufacturerName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     manufacturer = new Manufacturer();
