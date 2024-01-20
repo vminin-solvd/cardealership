@@ -48,9 +48,10 @@ public class ManufacturerDAO implements IManufacturerDAO {
             ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Manufacturer manufacturer = new Manufacturer();
-                    manufacturer.setId(rs.getInt("id"));
-                    manufacturer.setManufacturerName(rs.getString("manufacturer_name"));
+                    Manufacturer manufacturer = new Manufacturer.Builder()
+                            .setId(rs.getInt("id"))
+                            .setManufacturerName(rs.getString("manufacturer_name"))
+                            .build();
                     manufacturers.add(manufacturer);
                 }
             }
@@ -72,14 +73,16 @@ public class ManufacturerDAO implements IManufacturerDAO {
     public Manufacturer getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM manufacturers WHERE id = (?)";
-        Manufacturer Manufacturer = new Manufacturer();
+        Manufacturer manufacturer = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Manufacturer.setId(rs.getInt("id"));
-                    Manufacturer.setManufacturerName(rs.getString("manufacturer_name"));
+                    manufacturer = new Manufacturer.Builder()
+                            .setId(rs.getInt("id"))
+                            .setManufacturerName(rs.getString("manufacturer_name"))
+                            .build();
                 }
             }
         } catch (SQLException e) {
@@ -93,7 +96,7 @@ public class ManufacturerDAO implements IManufacturerDAO {
                 }
             }
         }
-        return Manufacturer;
+        return manufacturer;
     }
 
     @Override
@@ -147,9 +150,10 @@ public class ManufacturerDAO implements IManufacturerDAO {
             ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    manufacturer = new Manufacturer();
-                    manufacturer.setId(rs.getInt("id"));
-                    manufacturer.setManufacturerName(rs.getString("manufacturer_name"));
+                    manufacturer = new Manufacturer.Builder()
+                            .setId(rs.getInt("id"))
+                            .setManufacturerName(rs.getString("manufacturer_name"))
+                            .build();
                 }
             }
         } catch (SQLException e) {

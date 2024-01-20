@@ -48,6 +48,26 @@ public class Car {
         return manufacturer;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public boolean isSold() {
+        return isSold;
+    }
+
     @Override
     public String toString() {
         return "Car{" +

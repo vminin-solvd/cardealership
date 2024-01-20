@@ -27,15 +27,17 @@ public class CarDAO implements ICarDAO {
             ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Car car = new Car();
-                    car.setId(rs.getInt("id"));
-                    car.setPrice(rs.getInt("price"));
-                    car.setModel(rs.getString("model"));
-                    car.setYear(rs.getString("year"));
-                    car.setSold(rs.getBoolean("is_sold"));
-                    car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
-                    car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
-                    cars.add(car);}
+                    Car car = new Car.Builder()
+                            .setId(rs.getInt("id"))
+                            .setPrice(rs.getInt("price"))
+                            .setModel(rs.getString("model"))
+                            .setYear(rs.getString("year"))
+                            .setIsSold(rs.getBoolean("is_sold"))
+                            .setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")))
+                            .setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")))
+                            .build();
+                    cars.add(car);
+                }
             }
         } catch (SQLException e) {
             LOGGER.info("Error getting all cars: ", e);
@@ -80,19 +82,21 @@ public class CarDAO implements ICarDAO {
     public Car getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM cars WHERE id = (?)";
-        Car car = new Car();
+        Car car = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    car.setId(rs.getInt("id"));
-                    car.setPrice(rs.getInt("price"));
-                    car.setModel(rs.getString("model"));
-                    car.setYear(rs.getString("year"));
-                    car.setSold(rs.getBoolean("is_sold"));
-                    car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
-                    car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
+                    car = new Car.Builder()
+                            .setId(rs.getInt("id"))
+                            .setPrice(rs.getInt("price"))
+                            .setModel(rs.getString("model"))
+                            .setYear(rs.getString("year"))
+                            .setIsSold(rs.getBoolean("is_sold"))
+                            .setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")))
+                            .setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")))
+                            .build();
                 }
             }
         } catch (SQLException e) {
@@ -164,14 +168,15 @@ public class CarDAO implements ICarDAO {
             ps.setString(1, model);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Car car = new Car();
-                car.setId(rs.getInt("id"));
-                car.setPrice(rs.getInt("price"));
-                car.setModel(rs.getString("model"));
-                car.setYear(rs.getString("year"));
-                car.setSold(rs.getBoolean("is_sold"));
-                car.setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")));
-                car.setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")));
+                Car car = new Car.Builder()
+                        .setId(rs.getInt("id"))
+                        .setPrice(rs.getInt("price"))
+                        .setModel(rs.getString("model"))
+                        .setYear(rs.getString("year"))
+                        .setIsSold(rs.getBoolean("is_sold"))
+                        .setCarType(new CarTypeDAO().getEntityById(rs.getInt("car_type_id")))
+                        .setManufacturer(new ManufacturerDAO().getEntityById(rs.getInt("manufacturer_id")))
+                        .build();
                 cars.add(car);
             }
         } catch (SQLException e) {
