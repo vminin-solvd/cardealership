@@ -50,7 +50,7 @@ public class  OrderHasAdditionalServiceDAO implements IOrderHasAdditionalService
         OrderHasAdditionalService orderHasAdditionalService = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     Order order = orderDAO.getEntityById(rs.getInt("order_id"));
@@ -58,7 +58,10 @@ public class  OrderHasAdditionalServiceDAO implements IOrderHasAdditionalService
                     orderHasAdditionalService = new OrderHasAdditionalService();
                     orderHasAdditionalService.setOrder(order);
                     orderHasAdditionalService.setAdditionalService(additionalService);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4090ae0d12fe9235a22700eb0bbffb25fe8ebc37
                 }
             }
         } catch (SQLException e) {
@@ -125,7 +128,7 @@ public class  OrderHasAdditionalServiceDAO implements IOrderHasAdditionalService
         Connection connection = connectionPool.getConnection();
         List<OrderHasAdditionalService> orderHasAdditionalServices = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     Order order = orderDAO.getEntityById(rs.getInt("order_id"));
@@ -157,7 +160,7 @@ public class  OrderHasAdditionalServiceDAO implements IOrderHasAdditionalService
         List<AdditionalService> additionalServices = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     AdditionalService additionalService = additionalServiceDAO.getEntityById(rs.getInt("additional_service_id"));

@@ -45,12 +45,13 @@ public class CarTypeDAO implements ICarTypeDAO {
         String query = "SELECT * FROM car_types";
         List<CarType> carTypes = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    CarType carType = new CarType();
-                    carType.setId(rs.getInt("id"));
-                    carType.setCarType(rs.getString("car_type"));
+                    CarType carType = new CarType.Builder()
+                            .setId(rs.getInt("id"))
+                            .setCarType(rs.getString("car_type"))
+                            .build();
                     carTypes.add(carType);
                 }
             }
@@ -76,11 +77,13 @@ public class CarTypeDAO implements ICarTypeDAO {
         CarType carType = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    carType.setId(rs.getInt("id"));
-                    carType.setCarType(rs.getString("car_type"));
+                    carType = new CarType.Builder()
+                            .setId(rs.getInt("id"))
+                            .setCarType(rs.getString("car_type"))
+                            .build();
                 }
             }
         } catch (SQLException e) {
@@ -145,12 +148,13 @@ public class CarTypeDAO implements ICarTypeDAO {
         CarType carType = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, carTypeName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    carType = new CarType();
-                    carType.setId(rs.getInt("id"));
-                    carType.setCarType(rs.getString("car_type"));
+                    carType = new CarType.Builder()
+                            .setId(rs.getInt("id"))
+                            .setCarType(rs.getString("car_type"))
+                            .build();
                 }
             }
         } catch (SQLException e) {

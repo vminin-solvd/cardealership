@@ -24,14 +24,15 @@ public class CarSaleDAO implements ICarSaleDAO {
         String query = "SELECT * FROM car_sales";
         List<CarSale> carSales = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    CarSale carSale = new CarSale();
-                    carSale.setId(rs.getInt("id"));
-                    carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
-                    carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
-                    carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
+                    CarSale carSale = new CarSale.Builder()
+                            .setId(rs.getInt("id"))
+                            .setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")))
+                            .setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")))
+                            .setCar(new CarDAO().getEntityById(rs.getInt("car_id")))
+                            .build();
                     carSales.add(carSale);
                 }
             }
@@ -76,16 +77,18 @@ public class CarSaleDAO implements ICarSaleDAO {
     public CarSale getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM car_sales WHERE id = (?)";
-        CarSale carSale = new CarSale();
+        CarSale carSale = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    carSale.setId(rs.getInt("id"));
-                    carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
-                    carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
-                    carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
+                    carSale = new CarSale.Builder()
+                            .setId(rs.getInt("id"))
+                            .setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")))
+                            .setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")))
+                            .setCar(new CarDAO().getEntityById(rs.getInt("car_id")))
+                            .build();
                 }
             }
         } catch (SQLException e) {
@@ -153,14 +156,15 @@ public class CarSaleDAO implements ICarSaleDAO {
         String query = "SELECT * FROM car_sales WHERE employee_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
-            try (ResultSet rs = ps.getResultSet()) {
+            ps.executeQuery();
+            try (ResultSet rs = ps.getResultSet()){
                 while (rs.next()) {
-                    CarSale carSale = new CarSale();
-                    carSale.setId(rs.getInt("id"));
-                    carSale.setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")));
-                    carSale.setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")));
-                    carSale.setCar(new CarDAO().getEntityById(rs.getInt("car_id")));
+                    CarSale carSale = new CarSale.Builder()
+                            .setId(rs.getInt("id"))
+                            .setCustomer(new CustomerDAO().getEntityById(rs.getInt("customer_id")))
+                            .setEmployee(new EmployeeDAO().getEntityById(rs.getInt("employee_id")))
+                            .setCar(new CarDAO().getEntityById(rs.getInt("car_id")))
+                            .build();
                     carSales.add(carSale);
                 }
             }

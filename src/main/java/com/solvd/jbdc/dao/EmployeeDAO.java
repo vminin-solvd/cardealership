@@ -47,16 +47,18 @@ public class EmployeeDAO implements IEmployeeDAO {
         String query = "SELECT * FROM employees";
         List<Employee> employees = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Employee employee = new Employee();
-                    employee.setId(rs.getInt("id"));
-                    employee.setFirstName(rs.getString("first_name"));
-                    employee.setLastName(rs.getString("last_name"));
-                    Position position = new Position();
-                    position.setId(rs.getInt("position_id"));
-                    employee.setPosition(position);
+                    Position position = new Position.Builder()
+                            .setId(rs.getInt("position_id"))
+                            .build();
+                    Employee employee = new Employee.Builder()
+                            .setId(rs.getInt("id"))
+                            .setFirstName(rs.getString("first_name"))
+                            .setLastName(rs.getString("last_name"))
+                            .setPosition(position)
+                            .build();
                     employees.add(employee);
                 }
             }
@@ -79,18 +81,21 @@ public class EmployeeDAO implements IEmployeeDAO {
     public Employee getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM employees WHERE id = (?)";
-        Employee employee = new Employee();
+        Employee employee = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    employee.setId(rs.getInt("id"));
-                    employee.setFirstName((rs.getString("first_name")));
-                    employee.setLastName((rs.getString("last_name")));
-                    Position position = new Position();
-                    position.setId(rs.getInt("position_id"));
-                    employee.setPosition(position);
+                    Position position = new Position.Builder()
+                            .setId(rs.getInt("position_id"))
+                            .build();
+                    employee = new Employee.Builder()
+                            .setId(rs.getInt("id"))
+                            .setFirstName(rs.getString("first_name"))
+                            .setLastName(rs.getString("last_name"))
+                            .setPosition(position)
+                            .build();
                 }
             }
         } catch (SQLException e) {
@@ -160,13 +165,15 @@ public class EmployeeDAO implements IEmployeeDAO {
             ps.setString(1, lastName);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Employee employee = new Employee();
-                employee.setId(rs.getInt("id"));
-                employee.setFirstName(rs.getString("first_name"));
-                employee.setLastName(rs.getString("last_name"));
-                Position position = new Position();
-                position.setId(rs.getInt("position_id"));
-                employee.setPosition(position);
+                Position position = new Position.Builder()
+                        .setId(rs.getInt("position_id"))
+                        .build();
+                Employee employee = new Employee.Builder()
+                        .setId(rs.getInt("id"))
+                        .setFirstName(rs.getString("first_name"))
+                        .setLastName(rs.getString("last_name"))
+                        .setPosition(position)
+                        .build();
                 employees.add(employee);
             }
         } catch (SQLException e) {

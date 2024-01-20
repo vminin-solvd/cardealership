@@ -17,12 +17,12 @@ public class ConnectionPool {
     private static Vector<Connection> usedConnections = new Vector<>();
 
     public static synchronized ConnectionPool getInstance() {
-        if (instance == null) {
-            instance = new ConnectionPool();
-            create();
-        }
-        return instance;
-    }
+        if(instance == null) {
+          instance = new ConnectionPool();
+          create();
+       }
+       return instance;
+}
 
     public static void create() {
         for (int numConnections = 0; numConnections < INITIAL_POOL_SIZE; numConnections++) {
@@ -36,21 +36,20 @@ public class ConnectionPool {
         return connection;
 }
 
-public synchronized void releaseConnection(Connection connection) throws SQLException {
-    if (usedConnections.remove(connection)) {
-        freeConnections.add(connection);
-    } else {
-        throw new SQLException("Connection has already returned");
+    public synchronized void releaseConnection(Connection connection) throws SQLException {
+        if (usedConnections.remove(connection)) {
+            freeConnections.add(connection);
+        } else {
+            throw new SQLException("Connection has already returned");
     }
-
 }
 
-private static Connection createConnection(String url, String userName, String password) {
-    try {
-      return  DriverManager.getConnection(url, userName, password);
-    } catch (SQLException e) {
-        LOGGER.info(e.getMessage());
+    private static Connection createConnection(String url, String userName, String password) {
+        try {
+            return  DriverManager.getConnection(url, userName, password);
+        } catch (SQLException e) {
+            LOGGER.info(e.getMessage());
     }
-    return null;
-}
+        return null;
+    }
 }

@@ -45,7 +45,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         String query = "SELECT * FROM additional_services";
         List<AdditionalService> additionalServiceList = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     AdditionalService additionalService = new AdditionalService();
@@ -76,7 +76,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         AdditionalService additionalService = new AdditionalService();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     additionalService.setId(rs.getInt("id"));
@@ -104,6 +104,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, additionalService.getServiceType().getServiceType());
             ps.setInt(2, additionalService.getId());
+            ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info("Error updating additional service entity: ", e);
         } finally {
@@ -123,7 +124,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         String query = "DELETE FROM additional_services WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info("Error removing additional service entity by ID: ", e);
         } finally {
@@ -144,7 +145,7 @@ public class AdditionalServiceDAO implements IAdditionalServiceDAO {
         AdditionalService additionalService = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, serviceName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
                     additionalService.setId(rs.getInt("id"));

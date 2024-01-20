@@ -45,13 +45,14 @@ public class CustomerDAO implements ICustomerDAO {
         String query = "SELECT * FROM customers";
         List<Customer> customers = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Customer customer = new Customer();
-                    customer.setId(rs.getInt("id"));
-                    customer.setFirstName(rs.getString("first_name"));
-                    customer.setLastName(rs.getString("last_name"));
+                    Customer customer = new Customer.Builder()
+                            .setId(rs.getInt("id"))
+                            .setFirstName(rs.getString("first_name"))
+                            .setLastName(rs.getString("last_name"))
+                            .build();
                     customers.add(customer);
                 }
             }
@@ -74,15 +75,17 @@ public class CustomerDAO implements ICustomerDAO {
     public Customer getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM customers WHERE id = (?)";
-        Customer customer = new Customer();
+        Customer customer = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    customer.setId(rs.getInt("id"));
-                    customer.setFirstName(rs.getString("first_name"));
-                    customer.setLastName(rs.getString("last_name"));
+                    customer = new Customer.Builder()
+                            .setId(rs.getInt("id"))
+                            .setFirstName(rs.getString("first_name"))
+                            .setLastName(rs.getString("last_name"))
+                            .build();
                 }
             }
         } catch (SQLException e) {
@@ -127,7 +130,7 @@ public class CustomerDAO implements ICustomerDAO {
         String query = "DELETE FROM customers WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
         } catch (SQLException e) {
             LOGGER.info("Error removing customer entity by ID: ", e);
         } finally {
@@ -148,13 +151,14 @@ public class CustomerDAO implements ICustomerDAO {
         Customer customer = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, firstName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    customer = new Customer();
-                    customer.setId(rs.getInt("id"));
-                    customer.setFirstName(rs.getString("first_name"));
-                    customer.setLastName(rs.getString("last_name"));
+                    customer = new Customer.Builder()
+                            .setId(rs.getInt("id"))
+                            .setFirstName(rs.getString("first_name"))
+                            .setLastName(rs.getString("last_name"))
+                            .build();
                 }
             }
         } catch (SQLException e) {

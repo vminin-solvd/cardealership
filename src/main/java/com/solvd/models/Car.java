@@ -1,7 +1,6 @@
 package com.solvd.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "car")
@@ -11,81 +10,62 @@ public class Car {
 
     @XmlAttribute(name = "id")
     @JsonProperty("id")
-    private int id;
+    private final int id;
     @XmlElement(name = "price")
     @JsonProperty("price")
-    private int price;
+    private final int price;
     @XmlElement(name = "model")
     @JsonProperty("model")
-    private String model;
+    private final String model;
     @XmlElement(name = "year")
     @JsonProperty("year")
-    private String year;
+    private final String year;
     @XmlElement(name = "isSold")
     @JsonProperty("isSold")
-    private boolean isSold;
+    private final boolean isSold;
     @XmlElement(name = "carType", type = CarType.class)
     @JsonProperty("carType")
-    private CarType carType;
+    private final CarType carType;
     @XmlElement(name = "manufacturer", type = Manufacturer.class)
     @JsonProperty("manufacturer")
-    private Manufacturer manufacturer;
+    private final Manufacturer manufacturer;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public boolean isSold() {
-        return isSold;
-    }
-
-    @JsonProperty("isSold")
-    public void setSold(boolean sold) {
-        isSold = sold;
+    private Car(Builder builder) {
+        this.id = builder.id;
+        this.price = builder.price;
+        this.model = builder.model;
+        this.year = builder.year;
+        this.isSold = builder.isSold;
+        this.carType = builder.carType;
+        this.manufacturer = builder.manufacturer;
     }
 
     public CarType getCarType() {
         return carType;
     }
 
-    public void setCarType(CarType carType) {
-        this.carType = carType;
-    }
-
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
+    public int getId() {
+        return id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public boolean isSold() {
+        return isSold;
     }
 
     @Override
@@ -99,5 +79,54 @@ public class Car {
                 ", carType=" + carType +
                 ", manufacturer=" + manufacturer +
                 '}';
+    }
+
+    public static class Builder {
+        private int id;
+        private int price;
+        private String model;
+        private String year;
+        private boolean isSold;
+        private CarType carType;
+        private Manufacturer manufacturer;
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setPrice(int price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder setModel(String model) {
+            this.model = model;
+            return this;
+        }
+
+        public Builder setYear(String year) {
+            this.year = year;
+            return this;
+        }
+
+        public Builder setIsSold(boolean isSold) {
+            this.isSold = isSold;
+            return this;
+        }
+
+        public Builder setCarType(CarType carType) {
+            this.carType = carType;
+            return this;
+        }
+
+        public Builder setManufacturer(Manufacturer manufacturer) {
+            this.manufacturer = manufacturer;
+            return this;
+        }
+
+        public Car build() {
+            return new Car(this);
+        }
     }
 }

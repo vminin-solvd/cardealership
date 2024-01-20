@@ -44,12 +44,13 @@ public class PositionDAO implements IPositionDAO {
         String query = "SELECT * FROM positions";
         List<Position> positions = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    Position position = new Position();
-                    position.setId(rs.getInt("id"));
-                    position.setPositionName(rs.getString("position_name"));
+                    Position position = new Position.Builder()
+                            .setId(rs.getInt("id"))
+                            .setPositionName(rs.getString("position_name"))
+                            .build();
                     positions.add(position);
                 }
             }
@@ -72,14 +73,16 @@ public class PositionDAO implements IPositionDAO {
     public Position getEntityById(int id) {
         Connection connection = connectionPool.getConnection();
         String query = "SELECT * FROM positions WHERE id = (?)";
-        Position position = new Position();
+        Position position = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    position.setId(rs.getInt("id"));
-                    position.setPositionName((rs.getString("position_name")));
+                    position = new Position.Builder()
+                            .setId(rs.getInt("id"))
+                            .setPositionName(rs.getString("position_name"))
+                            .build();
                 }
             }
         } catch (SQLException e) {
@@ -123,7 +126,7 @@ public class PositionDAO implements IPositionDAO {
         String query = "DELETE FROM positions WHERE id = (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.execute();
+            ps.executeQuery();
         } catch (SQLException e) {
             LOGGER.info("Error removing position entity by ID: ", e);
         } finally {
@@ -144,12 +147,13 @@ public class PositionDAO implements IPositionDAO {
         Position position = null;
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, positionName);
-            ps.execute();
+            ps.executeQuery();
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
-                    position = new Position();
-                    position.setId(rs.getInt("id"));
-                    position.setPositionName(rs.getString("position_name"));
+                    position = new Position.Builder()
+                            .setId(rs.getInt("id"))
+                            .setPositionName(rs.getString("position_name"))
+                            .build();
                 }
             }
         } catch (SQLException e) {

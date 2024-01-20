@@ -1,7 +1,6 @@
 package com.solvd.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "manufacturer")
@@ -11,19 +10,14 @@ public class Manufacturer {
 
     @XmlAttribute(name = "id")
     @JsonProperty("id")
-    private int id;
+    private final int id;
     @XmlElement(name = "manufacturerName")
     @JsonProperty("manufacturerName")
-    private String manufacturerName;
+    private final String manufacturerName;
 
-    public Manufacturer() {}
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;
+    private Manufacturer(Builder builder) {
+        this.id = builder.id;
+        this.manufacturerName = builder.manufacturerName;
     }
 
     public int getId() {
@@ -41,4 +35,24 @@ public class Manufacturer {
                 ", manufacturerName='" + manufacturerName + '\'' +
                 '}';
     }
+
+    public static class Builder {
+        private int id;
+        private String manufacturerName;
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setManufacturerName(String manufacturerName) {
+            this.manufacturerName = manufacturerName;
+            return this;
+        }
+
+        public Manufacturer build() {
+            return new Manufacturer(this);
+        }
+    }
 }
+
